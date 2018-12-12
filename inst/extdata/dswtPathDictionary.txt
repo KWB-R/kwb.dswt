@@ -1,0 +1,32 @@
+#
+# Description of directory and file names in project DSWT
+#
+
+#------------------------------
+# input directories and files
+#------------------------------
+LEVEL_DATA_DIR = <RAW_DIR>/<STATION>/H
+LEVEL_DATA_FILE_PATTERN = ^H_\d{8}_<STATION>\.csv$
+
+SAMPLE_DIR = <RAW_DIR>/<STATION>/PN
+SAMPLE_CSV_PATTERN = ^PN_\d{8}_<STATION>\.csv$
+#SAMPLE_CSV_PATTERN = ^Treffurter PN \d\d\-\d\d\-\d{4}_<STATION>\.csv$
+
+#------------------------------
+# output directories and files
+#------------------------------
+OUTPUT_DIR = <RAW_DIR>/../../DatenAnalyse/Automatic/<STATION>
+OUTPUT_DIR_OVERVIEW = <OUTPUT_DIR>/OverviewPlots
+OUTPUT_DIR_EVENTS = <OUTPUT_DIR>/SampledEvents
+
+OVERVIEW_HQ_DATA_PDF = <OUTPUT_DIR_OVERVIEW>/tmp_<STATION>_<HYDRAULIC_END>_since_<HYDRAULIC_BEGIN>_HQ_data.pdf
+OVERVIEW_EVENTS_PDF = <OUTPUT_DIR_OVERVIEW>/tmp_<STATION>_<HYDRAULIC_END>_since_<HYDRAULIC_BEGIN>_H_events.pdf
+
+SAMPLED_EVENT_PREFIX = <OUTPUT_DIR_EVENTS>/<SAMPLED_EVENT_NAME>/tmp_<STATION>_<SAMPLED_EVENT_NAME>
+
+SAMPLED_EVENT_CSV_SAMPLES = <SAMPLED_EVENT_PREFIX>_samples.csv
+SAMPLED_EVENT_CSV_BOTTLES = <SAMPLED_EVENT_PREFIX>_bottles.csv
+SAMPLED_EVENT_CSV_HYDRAULICS = <SAMPLED_EVENT_PREFIX>_hydraulics.csv
+SAMPLED_EVENT_CSV_COMPOSITE = <SAMPLED_EVENT_PREFIX>_composite.csv
+SAMPLED_EVENT_PDF_COMPOSITE = <SAMPLED_EVENT_PREFIX>_composite.pdf
+SAMPLED_EVENT_PDF_ACTIONS = <SAMPLED_EVENT_PREFIX>_actions.pdf

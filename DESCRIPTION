@@ -1,0 +1,9 @@
+Package: kwb.dswt
+Maintainer: Hauke Sonnenberg <hauke.sonnenberg@kompetenz-wasser.de>
+Imports: kwb.utils, kwb.datetime, kwb.event, kwb.plot, kwb.read, kwb.monitoring, kwb.logger
+Suggests: RCurl
+Author: Hauke Sonnenberg
+Version: 0.0.99
+License: GPL
+Title: functions to be used in KWB project DSWT; DEVELOPMENT version
+Description: This package contains functions to be used in KWB project DSWT.
