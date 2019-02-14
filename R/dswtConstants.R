@@ -129,7 +129,7 @@ DSWT_TIMESERIES <- function # DSWT_TIMESERIES
                          QualityControlLevelID = 0 # Rohdaten
     ),
     
-    FLOW_TUB_RAW = list(MethodID = 65,  # Errechnet auf Basis von Wasserhöhe_Durchfluss
+    FLOW_TUB_RAW = list(MethodID = 65,  # Errechnet auf Basis von Wasserhoehe_Durchfluss
                         VariableID = 4, # Durchfluss
                         SourceID = 2,   # TUB
                         QualityControlLevelID = 0 # Rohdaten
@@ -187,19 +187,19 @@ keyFields_DSWT <- function # key field values in DSWT project
     C_M6_H = c(dswtTimeseries$LEVEL_TUB_RAW, dswtSites$C_M6),
     C_M6_Q = c(dswtTimeseries$FLOW_TUB_RAW, dswtSites$C_M6),
 
-    # Treffurter Straße - RS Hsch
+    # Treffurter Strasse - RS Hsch
     T_Hsch_FUB = c(dswtTimeseries$RAIN_FUB_RAW, dswtSites$T_Hsch),
 
-    # Treffurter Straße - RS Mar1
+    # Treffurter Strasse - RS Mar1
     T_Mar1_FUB = c(dswtTimeseries$RAIN_FUB_RAW, dswtSites$T_Mar1),
     
-    # Treffurter Straße - RS Mal
+    # Treffurter Strasse - RS Mal
     T_Mal_FUB = c(dswtTimeseries$RAIN_FUB_RAW, dswtSites$T_Mal),
                      
-    # Treffurter Straße - RS Bie
+    # Treffurter Strasse - RS Bie
     T_Bie_FUB = c(dswtTimeseries$RAIN_FUB_RAW, dswtSites$T_Bie),
     
-    # Treffurter Straße - RS Lbg
+    # Treffurter Strasse - RS Lbg
     T_Lbg_FUB = c(dswtTimeseries$RAIN_FUB_RAW, dswtSites$T_Lbg),
     
     # Clayallee - RS Stg
