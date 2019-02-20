@@ -10,23 +10,23 @@ H_Q_Table <- function(DN)
 {
   if (DN == 150) {
     
-    hq <- as.data.frame(.H_Q_Matrix_DN_150())
+    hq <- as.data.frame(H_Q_Matrix_DN_150())
     
   } else if (DN == 300) {
     
-    hq <- as.data.frame(.H_Q_Matrix_DN_300())
+    hq <- as.data.frame(H_Q_Matrix_DN_300())
     
   } else {
     
-    .stopWithNoSuchDN()
+    stopWithNoSuchDN()
   }
   
   names(hq) <- c("H_m", "Q_L_h")
   convertQUnits(hq)
 }
 
-# .H_Q_Matrix_DN_150 -----------------------------------------------------------
-.H_Q_Matrix_DN_150 <- function() {
+# H_Q_Matrix_DN_150 ------------------------------------------------------------
+H_Q_Matrix_DN_150 <- function() {
   matrix(ncol = 2, byrow = TRUE, c(
     0.006, 47.54, 
     0.012, 183.68, 
@@ -66,8 +66,8 @@ H_Q_Table <- function(DN)
   ))
 }
 
-# .H_Q_Matrix_DN_300 -----------------------------------------------------------
-.H_Q_Matrix_DN_300 <- function() {
+# H_Q_Matrix_DN_300 ------------------------------------------------------------
+H_Q_Matrix_DN_300 <- function() {
   matrix(ncol = 2, byrow = TRUE, c(
     0.013, 329.11, 
     0.026, 1271.6, 

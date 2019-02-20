@@ -41,7 +41,7 @@ getHQSeriesFromCSV <- function(
     myData <- kwb.utils::renameColumns(myData, list(Level_cm = "Hraw_cm"))
   }
   
-  if (!"Hraw_m" %in% names(myData)) {
+  if (! "Hraw_m" %in% names(myData)) {
     
     kwb.utils::checkForMissingColumns(myData, "Hraw_cm")
     
@@ -109,7 +109,7 @@ correctHandCalculateQ <- function(hdat, hoffset, DN)
 #' 
 H_to_Q <- function(H, DN)
 {
-  regressionCoefficients <- .regressionCoefficientsForDN(DN = DN)
+  regressionCoefficients <- regressionCoefficientsForDN(DN = DN)
   
   regressionCoefficients$a * H^regressionCoefficients$b
 }
@@ -128,13 +128,13 @@ H_to_Q <- function(H, DN)
 #' 
 Q_to_H <- function(Q, DN)
 {
-  regressionCoefficients <- .regressionCoefficientsForDN(DN = DN)
+  regressionCoefficients <- regressionCoefficientsForDN(DN = DN)
   
   (Q/regressionCoefficients$a)^(1 / regressionCoefficients$b)
 }
 
-# .regressionCoefficientsForDN -------------------------------------------------
-.regressionCoefficientsForDN <- function(DN)
+# regressionCoefficientsForDN --------------------------------------------------
+regressionCoefficientsForDN <- function(DN)
 {
   if (DN == 150) {
     
@@ -148,14 +148,14 @@ Q_to_H <- function(Q, DN)
     
   } else {
     
-    .stopWithNoSuchDN()
+    stopWithNoSuchDN()
   }
   
   list(a = a, b = b)
 }
 
-# .stopWithNoSuchDN ------------------------------------------------------------
-.stopWithNoSuchDN <- function()
+# stopWithNoSuchDN -------------------------------------------------------------
+stopWithNoSuchDN <- function()
 {
   stop("HQ relationship only available for DN = 150 or DN = 300")
 }
