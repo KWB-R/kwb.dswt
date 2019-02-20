@@ -1,0 +1,192 @@
+---
+title: "About the Creation of this Package"
+author: "Hauke Sonnenberg"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{about}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This package was created during the runtime of the KWB project 
+[DSWT (Decentralised Treatment of Roadway Runoffs)](https://www.kompetenz-wasser.de/en/project/dswt-dezentrale-reinigung-von-strassenabfluessen/).
+I want to document here what I did to the package since then.
+
+## Convert Inline Documentation
+
+In the package I already used so called inline documentation, i.e. I shortly
+described functions and their arguments by means of special comments directly
+in the source code. A function header, for example, looked like that:
+
+```{r eval = FALSE}
+readAndPlotAutoSamplerFiles <- function # readAndPlotAutoSamplerFiles
+### readAndPlotAutoSamplerFiles
+(
+  filePaths,
+  ### full path(s) to ORI Auto sampler log files PN_<yyyymmdd>_<station>.csv
+  removePattern = "Power|Bluetooth|Modem|SMS|Sonde",
+  ### regular expression pattern matching logged actions to be removed before
+  ### plotting. Set to "" in order not to remove any action
+  to.pdf = TRUE,
+  ### if TRUE, graphical output is directed to PDF
+  evtSepTime = 30*60
+)
+{
+  # Here comes the body of the function
+}
+```
+
+You could give a title after `function` (here just the name of the function,
+`readAndPlotAutoSamplerFiles`, and a description direcly behind after three
+comment characters, `###`. The example above reveals that I was too lazy to give
+a good title and description. Instead, I just used the name of the function for
+both. Then, again after `###` in each case and always directly following the
+definition of an argument, you could document the meaning of the arguments of
+the function. Again, the example above is not a good model as it lacks the
+description of the last argument, `evtSepTime`.
+
+I was then using the package "inlinedocs" to convert these comments into R
+documentation files.
+
+[Roxygen](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html)
+is another system that allows to generate documentation from special comments in
+the source code. As Roxygen has evolved to a quasi-standard for inline
+documentation and is supported by the Development Environment
+[RStudio](https://www.rstudio.com/), I converted all inlinedocs comments to
+Roxygen comments. For that purpose I used the script `toRoxygen.R` that is under
+Subversion control in the subfolder `RScripts/_OTHERS/`.
+
+After conversion, the header of the function above looked (almost) like that:
+
+```{r eval = FALSE}
+#' Read and Plot Autosampler Files
+#' 
+#' @param filePaths full path(s) to ORI Auto sampler log files
+#'   PN_<yyyymmdd>_<station>.csv
+#' @param removePattern regular expression pattern matching logged actions to be
+#'   removed before plotting. Set to "" in order not to remove any action
+#' @param to.pdf if TRUE, graphical output is directed to PDF
+#' 
+readAndPlotAutoSamplerFiles <- function(
+  filePaths,
+  removePattern = "Power|Bluetooth|Modem|SMS|Sonde",
+  to.pdf = TRUE,
+  evtSepTime = 30 * 60
+)
+{
+  # Here comes the body of the function
+}
+```
+
+All documentation snippets are now altogether in a comment code block directly
+above the function. In this block, all comments start with `#'` which indicates
+that these are special comments that are interpreded by Roxygen. The block
+starts with the title of the function. My converter script used my original
+"title" that was just the name of the function but after conversion I put a new,
+somehow meaningful title, "Read and Plot Autosampler Files". Roxygen supports
+some keywords, so called tags, that start with the `@` character. In the above
+example only the `@param` tag is used that indicates that the description of an
+argument (parameter) of the function is following.
+
+## Call Functions in Base Packages with their Package Name
+
+When I ran "Check" on the package, I got some notes in case of calling functions
+from the base packages "utils" or "graphics". A corresponding note reads like 
+the following:
+
+```
+* checking R code for possible problems ... NOTE
+plotAutoSamplerActions: no visible global function definition for
+  ‘axis’
+Undefined global functions or variables:
+  axis
+Consider adding
+  importFrom("graphics", "axis")
+to your NAMESPACE file.
+```
+
+I put `utils::` or `graphics::` in front of the function calls and the notes
+disappeared.
+
+## Export only the Top-Level Functions
+
+It is good practice to organise your code in terms of functions. In order 
+
+* to avoid code duplication, 
+* to allow for a reuse of existing code and 
+* to improve the readability of the code 
+
+it is also good practice to split the code within functions up into further
+sub-functions. This may result in a lot of functions and sub-functions. From a
+developer's point of view you may say: the more functions the better, given the
+fact that they have good interfaces and meaningful names. However, the user of
+the package should not be confronted with the full bunch of functions. 
+Therefore, only the top-level functions and not their sub-functions should be
+"exported" from the package, i.e. made availalble to the user when calling
+` library()`. In my original version, the package kwb.dswt did not respect this
+recommendation and exported all functions by having the following line in the
+`NAMESPACE` file:
+
+```{r eval = FALSE}
+exportPattern(".*")
+```
+
+I wanted to change this behaviour by using the Roxygen tag `@export` in the
+Roxygen headers of the functions to be exported and to let Roxygen generate the
+`NAMESPACE` file instead of manually maintaining this file. That arose the
+following question: 
+
+**What functions of the package are (or have ever been) used from a script outside of the package?**
+
+In fact, this question and my thoughts about its answer motivated me to write
+this vignette. I will (hopefully) propose a small script that finds out what
+functions of a package are called from a set of given scripts. Here comes the
+script that uses functions that I wrote in the scope of our project on research
+data management, [FAKIN](https://www.kompetenz-wasser.de/en/project/fakin-research-data-management/).
+
+You need to have the packages kwb.fakin and kwb.code installed. Install them from
+GitHub with:
+
+```{r eval = FALSE}
+remotes::install_github("kwb-r/kwb.fakin")
+remotes::install_github("kwb-r/kwb.code")
+```
+
+
+```{r include = FALSE}
+usage <- read.csv(system.file(
+  "extdata/function_usage.R", package = "kwb.dswt"
+))
+```
+
+```{r eval = FALSE}
+# Set the path to the root folder containing the scripts to analyse
+root <- "~/HAUKE/R_Development/RScripts"
+
+# Read all scripts below this root folder
+tree <- kwb.code::parse_scripts(root = root)
+
+# How many scripts were read?
+length(tree)
+
+# Check which functions from kwb.utils are used and how often
+usage <- kwb.fakin::get_package_function_usage(
+  tree, package = "kwb.dswt", simple = FALSE
+)
+
+# Show the table of function usage
+usage
+```
+```{r eval = FALSE, include = FALSE}
+write.csv(usage, "~/HAUKE/R/kwb.dswt/inst/extdata/function_usage.R")
+```
