@@ -11,13 +11,5 @@
 #' 
 dswtdir <- function()
 {
-  mydir <- file.path(tempdir(), "dswt")
-  
-  if (!file.exists(mydir)) {
-    
-    dir.create(mydir)
-    cat(sprintf("directory \"%s\" created.\n", mydir))
-  }
-  
-  mydir
+  kwb.utils::createDirectory(file.path(tempdir(), "dswt"))
 }
