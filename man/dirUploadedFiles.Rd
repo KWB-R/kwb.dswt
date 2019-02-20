@@ -18,5 +18,7 @@ list with elements \emph{PN}, \emph{H}, \emph{RD}, \emph{F},
   DSWT server at sysprovide.de
 }
 \description{
-List Uploaded Files
+You need to set the system environment variable "DSWT_FTP_LOGIN" to "user:pwd"
+where "user" is the username and "pwd" the password for the account that is
+allowed to access the FTP server where the files are stored.
 }

@@ -28,40 +28,49 @@ getHQSeriesFromCSV <- function(
   addTimeColumns = TRUE, additionalColumns = c("I_mA", "Battery_V"), ...
 )
 {
-  if (is.null(timeFormat)) {
-    timeFormat <- c("%d.%m.%Y %H:%M:%S", "%d.%m.%Y %H:%M")
-  }
+  timeFormat <- kwb.utils::defaultIfNULL(
+    timeFormat, c("%d.%m.%Y %H:%M:%S", "%d.%m.%Y %H:%M")
+  )
   
-  myData <- kwb.logger::readLogger_Ori_MLog(srcfile, sep = sep, timeFormat = timeFormat, ...)
+  myData <- kwb.logger::readLogger_Ori_MLog(
+    srcfile, sep = sep, timeFormat = timeFormat, ...
+  )
   
   if ("Level_cm" %in% names(myData)) {
+    
     myData <- kwb.utils::renameColumns(myData, list(Level_cm = "Hraw_cm"))
   }
   
   if (!"Hraw_m" %in% names(myData)) {
+    
     kwb.utils::checkForMissingColumns(myData, "Hraw_cm")
     
     # convert cm to m and rename column
     myData$Hraw_cm <- myData$Hraw_cm / 100
+    
     myData <- kwb.utils::renameColumns(myData, list(Hraw_cm = "Hraw_m"))
   }
   
-  hdat <- data.frame(
+  hdat <- kwb.utils::noFactorDataFrame(
     BerlinDateTimeNoDST = myData$myDateTime,
-    Hraw_m = myData$Hraw_m,
-    stringsAsFactors = FALSE)
+    Hraw_m = myData$Hraw_m
+  )
   
   if (length(additionalColumns) > 0) {
+    
     hdat <- cbind(hdat, myData[, additionalColumns])
   }
   
   hdat <- correctHandCalculateQ(hdat, hoffset = hoffset, DN = DN)
   
   if (isTRUE(addTimeColumns)) {
-    hdat <- insertLocalDateTimeColumns(hdat)
+    
+    insertLocalDateTimeColumns(hdat)
+    
+  } else {
+    
+    hdat
   }
-  
-  hdat
 }
 
 # correctHandCalculateQ --------------------------------------------------------
@@ -84,9 +93,7 @@ correctHandCalculateQ <- function(hdat, hoffset, DN)
   hdat$H_m[hdat$H_m < 0] <- 0
   
   # calculate flow Q from H
-  hdat$Q_L_s <- H_to_Q(hdat$H_m, DN)
-  
-  hdat
+  kwb.utils::setColumns(hdat, Q_L_s = H_to_Q(hdat$H_m, DN))
 }
 
 # H_to_Q -----------------------------------------------------------------------
@@ -152,5 +159,3 @@ Q_to_H <- function(Q, DN)
 {
   stop("HQ relationship only available for DN = 150 or DN = 300")
 }
-
-
