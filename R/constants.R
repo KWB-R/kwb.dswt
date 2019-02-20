@@ -5,11 +5,16 @@
 #' Default "dictionary" file describing the folder structure to be used in DSWT
 #' 
 #' @return path to path dictionary file stored in the (installed) package
+#' 
 #' @export
+#' 
 DSWT_DICTIONARY_FILE <- function()
 {
-  system.file("extdata", "dswtPathDictionary.txt", package = "kwb.dswt")
+  package_file("extdata", "dswtPathDictionary.txt")
 }
+
+# package_file -----------------------------------------------------------------
+package_file <- function(...) system.file(..., package = "kwb.dswt")
 
 # DSWT_H_OFFSETS ---------------------------------------------------------------
 
@@ -21,7 +26,9 @@ DSWT_DICTIONARY_FILE <- function()
 #'
 #' @return list of named elements with names corresponding to the monitoring
 #'   site and the value corresponding to the offest in metres.
+#'   
 #' @export 
+#' 
 DSWT_H_OFFSETS <- function()
 {
   list(
@@ -40,9 +47,7 @@ DSWT_H_OFFSETS <- function()
 #' DSWT_H_OFFSETS_SINCE
 DSWT_H_OFFSETS_SINCE <- function() 
 {
-  offsetFile <- system.file(
-    "extdata", "dswt_h_offsets_cm.csv", package = "kwb.dswt"
-  )
+  offsetFile <- package_file("extdata", "dswt_h_offsets_cm.csv")
   
   utils::read.table(offsetFile, sep = ";", header = TRUE, fill = TRUE)
 }
@@ -54,7 +59,9 @@ DSWT_H_OFFSETS_SINCE <- function()
 #' Containing e.g. a file name pattern
 #' 
 #' @return list mapping keywords to file name patterns
+#' 
 #' @export
+#' 
 DSWT_FILE_TYPES <- function()
 {
   to_pattern <- function(x) list(pattern = x)
@@ -80,6 +87,7 @@ DSWT_FILE_TYPES <- function()
 #' Map BWB Rain Gauge Names to DSWT SiteCodes
 #' 
 #' @return list with BWB names as element names and DSWT SiteCodes as elements
+#' 
 #' @export
 #' 
 DSWT_BWB_CODE_TO_SITE_CODE <- function() 
@@ -201,7 +209,9 @@ DSWT_TIMESERIES <- function()
 #' 
 #' @return A list with each entry representing a time series, i.e. the 
 #'   measurement of one variable at one site.
+#'   
 #' @export
+#' 
 keyFields_DSWT <- function()
 {
   dswtTimeseries <- DSWT_TIMESERIES()
