@@ -281,8 +281,8 @@ plotAutoSamplerActions <- function(
   context = c(0, 0.12), evtSepTime = 30 * 60, ...
 )
 {
-  graphicalParameters <- par(no.readonly=TRUE)
-  on.exit(par(graphicalParameters))
+  graphicalParameters <- graphics::par(no.readonly=TRUE)
+  on.exit(graphics::par(graphicalParameters))
 
   fileName <- unique(actions$file)
   stopifnot(length(fileName) == 1)
@@ -293,7 +293,11 @@ plotAutoSamplerActions <- function(
   rowsPerPage <- subevents.per.page + 1
 
   top.plot.height.cm <- 4 # 3
-  layout(matrix(1:rowsPerPage, ncol=1), heights=c(lcm(top.plot.height.cm)))
+  
+  graphics::layout(
+    matrix(1:rowsPerPage, ncol = 1), 
+    heights = c(graphics::lcm(top.plot.height.cm))
+  )
 
   numberOfSubevents <- nrow(subevents)
 
@@ -301,25 +305,29 @@ plotAutoSamplerActions <- function(
 
     # Repeat overview on each new page
     if ((i - 1) %% subevents.per.page == 0) {
-      par(mar=c(3,3,4,1))
+      graphics::par(mar=c(3,3,4,1))
 
       y1 <- 0
       y2 <- 1
 
       lastIndexOnPage <- min(numberOfSubevents, i+subevents.per.page-1)
 
-      ganttPlotEvents(subevents, xlab="", title="Intervalle:", leftMargin=0.05,
-                      density=density, ylim=c(0, 2), y1=y1, y2=y2, yLabel=1.5,
-                      indicate=i:lastIndexOnPage, indicationColour="red")
-
+      ganttPlotEvents(
+        subevents, xlab = "", title = "Intervalle:", leftMargin = 0.05,
+        density = density, ylim = c(0, 2), y1 = y1, y2 = y2, yLabel = 1.5,
+        indicate=i:lastIndexOnPage, indicationColour = "red"
+      )
+      
       at <- pretty(actions$myDateTime, 12)
-      axis(1, at=at, labels=format(at, format="%d.%m. %H:%M"))
+      graphics::axis(1, at = at, labels = format(at, format = "%d.%m. %H:%M"))
 
-      title(sprintf("Sampler-Datei #%d (%s), Intervalle %d - %d von %d",
-                    fileNumber, fileName,
-                    i, lastIndexOnPage, numberOfSubevents))
-
-      par(mar=c(3,3,0,1))
+      graphics::title(sprintf(
+        "Sampler-Datei #%d (%s), Intervalle %d - %d von %d",
+        fileNumber, fileName,
+        i, lastIndexOnPage, numberOfSubevents
+      ))
+      
+      graphics::par(mar = c(3, 3, 0, 1))
     }
 
     actionsInEvent <- hsGetEvent(actions, subevents, i)
@@ -347,16 +355,16 @@ plotAutoSamplerActions <- function(
                       xlab = "",
                       ylab = "")
 
-    do.call(plot, plot.args)
+    do.call(graphics::plot, plot.args)
 
     #cat("\n*** Calling addTimeAxis with times:\n ", paste(myDateTime, collapse="\n  "), "...\n")
     addTimeAxis(x, time.format="%H:%M", add.grid=TRUE)
 
     # title to the left
-    mtext(sprintf("Intervall %d", i), side = 2, line = 1)
+    graphics::mtext(sprintf("Intervall %d", i), side = 2, line = 1)
 
     # indicate subevent limits (red dashed)
-    abline(v = eventToXLim(subevents[i, ]), col="red", lty = 2)
+    graphics::abline(v = eventToXLim(subevents[i, ]), col="red", lty = 2)
 
     # labelling
     addLabels(x,

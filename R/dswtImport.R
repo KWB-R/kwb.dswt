@@ -6,7 +6,7 @@ prepareSingleVariableDataValuesForOdm <- function(
   dataFrame, colName, noDataValue = -9999, dbg = TRUE
 )
 {
-  kwb.utils::printIf(dbg, head(dataFrame))
+  kwb.utils::printIf(dbg, utils::head(dataFrame))
 
   columnNames <- c("BerlinDateTimeNoDST", colName)
 
@@ -14,33 +14,33 @@ prepareSingleVariableDataValuesForOdm <- function(
 
   dataValues <- dataFrame[, columnNames]
 
-  kwb.utils::printIf(dbg, head(dataValues))
+  kwb.utils::printIf(dbg, utils::head(dataValues))
 
   names(dataValues)[2] <- "DataValue"
 
   # replace NA with noDataValue
   dataValues$DataValue[is.na(dataValues$DataValue)] <- noDataValue
 
-  kwb.utils::printIf(dbg, head(dataValues))
+  kwb.utils::printIf(dbg, utils::head(dataValues))
 
   dataValues <- insertLocalDateTimeColumns(dataValues)
 
-  kwb.utils::printIf(dbg, head(dataValues))
+  kwb.utils::printIf(dbg, utils::head(dataValues))
 
   dataValues <- insertUtcDateTimeColumn(dataValues)
 
-  kwb.utils::printIf(dbg, head(dataValues))
+  kwb.utils::printIf(dbg, utils::head(dataValues))
 
   dataValues <- kwb.utils::hsRenameColumns(
     dataValues,
     list(BerlinDateTime = "LocalDateTime")
   )
 
-  kwb.utils::printIf(dbg, head(dataValues))
+  kwb.utils::printIf(dbg, utils::head(dataValues))
 
   dataValues <- dataValues[, names(dataValues) != "BerlinDateTimeNoDST"]
 
-  kwb.utils::printIf(dbg, head(dataValues))
+  kwb.utils::printIf(dbg, utils::head(dataValues))
 
   dataValues
 }

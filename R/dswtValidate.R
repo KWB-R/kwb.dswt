@@ -58,11 +58,11 @@ getLevelFilesInfo2 <- function(levelData)
   
   data.frame(
     file  = unique(levelData$file),
-    rows  = aggregate(levelData$row, by = by, FUN = length)$x,
-    min   = toUTC(aggregate(levelData$myDateTime, by = by, FUN = min)$x),
-    first = toUTC(aggregate(levelData$myDateTime, by = by, FUN = head, 1)$x),
-    last  = toUTC(aggregate(levelData$myDateTime, by = by, FUN = tail, 1)$x),
-    max   = toUTC(aggregate(levelData$myDateTime, by = by, FUN = max)$x),
+    rows  = stats::aggregate(levelData$row, by = by, FUN = length)$x,
+    min   = toUTC(stats::aggregate(levelData$myDateTime, by = by, FUN = min)$x),
+    first = toUTC(stats::aggregate(levelData$myDateTime, by = by, FUN = utils::head, 1)$x),
+    last  = toUTC(stats::aggregate(levelData$myDateTime, by = by, FUN = utils::tail, 1)$x),
+    max   = toUTC(stats::aggregate(levelData$myDateTime, by = by, FUN = max)$x),
     stringsAsFactors = FALSE
   )
 }
@@ -109,8 +109,8 @@ getTimestampStatistics <- function(timestamps)
 {  
   data.frame(
     min = min(timestamps), 
-    first = head(timestamps, 1), 
-    last = tail(timestamps, 1), 
+    first = utils::head(timestamps, 1), 
+    last = utils::tail(timestamps, 1), 
     max = max(timestamps), 
     stringsAsFactors = FALSE
   )

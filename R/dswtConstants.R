@@ -42,7 +42,7 @@ DSWT_H_OFFSETS_SINCE <- function()
     "extdata", "dswt_h_offsets_cm.csv", package = "kwb.dswt"
   )
   
-  read.table(offsetFile, sep = ";", header = TRUE, fill = TRUE)
+  utils::read.table(offsetFile, sep = ";", header = TRUE, fill = TRUE)
 }
 
 # DSWT_FILE_TYPES --------------------------------------------------------------

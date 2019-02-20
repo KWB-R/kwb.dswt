@@ -334,8 +334,8 @@ addTotalVolumeAndMaxQ <- function(
 {
   # calculate total volume and max flow per event
   myby <- list(eventnr=eventnr)
-  qsum <- aggregate(qValues, by=myby, FUN=sum)
-  qmax <- aggregate(qValues, by=myby, FUN=max)
+  qsum <- stats::aggregate(qValues, by=myby, FUN=sum)
+  qmax <- stats::aggregate(qValues, by=myby, FUN=max)
 
   signalWidth <- hsSigWidth(events)
   cat(sprintf("A signal width of %d seconds was deduced from the event list.\n",
@@ -388,7 +388,9 @@ reformatEvents <- function(events)
 writeHQSeriesToCSV <- function(hqSeries, csv, sep = ";", dec = ",")
 {
   cat("*** Writing HQ time series to", kwb.utils::windowsPath(csv), "... ")
-  write.table(hqSeries, csv, row.names = FALSE, sep = sep, dec = dec, na = "")
+  utils::write.table(
+    hqSeries, csv, row.names = FALSE, sep = sep, dec = dec, na = ""
+  )
   cat("ok.\n")
 }
 
@@ -404,7 +406,9 @@ writeHQSeriesToCSV <- function(hqSeries, csv, sep = ";", dec = ",")
 writeEventListToCSV <- function(events, csv, sep = ";", dec = ",")
 {
   cat("*** Writing event list to", kwb.utils::windowsPath(csv), "... ")
-  write.table(events, csv, row.names = FALSE, sep = sep, dec = dec, na = "")
+  utils::write.table(
+    events, csv, row.names = FALSE, sep = sep, dec = dec, na = ""
+  )
   cat("ok.\n")
 }
 
@@ -458,11 +462,13 @@ validate_HQ_relationship <- function(DN)
 {
   hq <- H_Q_Table(DN)
 
-  plot(hq$H_m, hq$Q_L_s, xlab = "H in m", ylab = "Q in L/s",
-       main = paste("DN", DN, sep=" = "))
-
+  graphics::plot(
+    hq$H_m, hq$Q_L_s, xlab = "H in m", ylab = "Q in L/s", 
+    main = paste("DN", DN, sep=" = ")
+  )
+  
   h <- seq(0, max(hq$Q_L_s), by = 0.01)
-  lines(h, H_to_Q(h, DN=DN), col="blue")
+  graphics::lines(h, H_to_Q(h, DN = DN), col = "blue")
 }
 
 # convertQUnits ----------------------------------------------------------------
