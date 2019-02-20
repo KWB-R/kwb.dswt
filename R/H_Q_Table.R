@@ -8,25 +8,25 @@
 #' 
 H_Q_Table <- function(DN)
 {
-  if (DN == 150) {
+  hq_matrix <- if (DN == 150) {
     
-    hq <- as.data.frame(H_Q_Matrix_DN_150())
+    H_Q_Matrix_DN_150()
     
   } else if (DN == 300) {
     
-    hq <- as.data.frame(H_Q_Matrix_DN_300())
+    H_Q_Matrix_DN_300()
     
   } else {
     
     stopWithNoSuchDN()
   }
   
-  names(hq) <- c("H_m", "Q_L_h")
-  convertQUnits(hq)
+  convertQUnits(stats::setNames(as.data.frame(hq_matrix), c("H_m", "Q_L_h")))
 }
 
 # H_Q_Matrix_DN_150 ------------------------------------------------------------
-H_Q_Matrix_DN_150 <- function() {
+H_Q_Matrix_DN_150 <- function()
+{
   matrix(ncol = 2, byrow = TRUE, c(
     0.006, 47.54, 
     0.012, 183.68, 
@@ -67,7 +67,8 @@ H_Q_Matrix_DN_150 <- function() {
 }
 
 # H_Q_Matrix_DN_300 ------------------------------------------------------------
-H_Q_Matrix_DN_300 <- function() {
+H_Q_Matrix_DN_300 <- function()
+{
   matrix(ncol = 2, byrow = TRUE, c(
     0.013, 329.11, 
     0.026, 1271.6, 
@@ -121,6 +122,5 @@ convertQUnits <- function(hq)
   hq$Q_m3_s <- round(hq$Q_L_h / 3600000, 6)
   hq$Q_m3_h <- round(hq$Q_L_h / 1000, 3)
   
-  hq[, c("H_m", "Q_L_s", "Q_m3_s", "Q_L_h", "Q_m3_h")]
+  kwb.utils::selectColumns(hq, c("H_m", "Q_L_s", "Q_m3_s", "Q_L_h", "Q_m3_h"))
 }
-

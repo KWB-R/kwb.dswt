@@ -16,9 +16,7 @@ prepareSingleVariableDataValuesForOdm <- function(
 
   columnNames <- c("BerlinDateTimeNoDST", colName)
 
-  kwb.utils::checkForMissingColumns(dataFrame, columnNames, do.stop = TRUE)
-
-  dataValues <- dataFrame[, columnNames]
+  dataValues <- kwb.utils::selectColumns(dataFrame, columnNames)
 
   kwb.utils::printIf(dbg, utils::head(dataValues))
 

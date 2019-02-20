@@ -41,12 +41,16 @@ getLevelFilesForSite <- function(config, station)
 #' 
 getDswtFilePaths <- function(srcdir, filetype, recursive = FALSE)
 {
-  srcfiles <- dir(srcdir, pattern = filetype$pattern, full.names = TRUE,
-                  recursive = recursive)
+  srcfiles <- dir(
+    srcdir, pattern = filetype$pattern, full.names = TRUE, recursive = recursive
+  )
   
   if (kwb.utils::isNullOrEmpty(srcfiles)) {
-    warning(sprintf("No files matching pattern '%s' found in %s\n",
-                    filetype$pattern, srcdir))
+    
+    warning(sprintf(
+      "No files matching pattern '%s' found in %s\n", filetype$pattern, srcdir
+    ))
+    
     return()
   }
   

@@ -14,23 +14,23 @@ insertLocalDateTimeColumns <- function(mydata)
   colname <- "BerlinDateTimeNoDST"
   winterTimeCol <- which(names(mydata) == colname)
   
-  if(length(winterTimeCol) != 1) {
+  if (length(winterTimeCol) != 1) {
+    
     stop(sprintf("No column \"%s\" found in data frame \"mydata\"!", colname))
   }
   
-  berlinTime <- kwb.datetime::berlinNormalTimeToBerlinLocalTime(mydata[[winterTimeCol]])
-  utcTime <- kwb.datetime::berlinNormalTimeToUTC(mydata[[winterTimeCol]])
+  winter_times <- mydata[[winterTimeCol]]
   
-  timesOnly <- data.frame(
-    BerlinDateTimeNoDST = mydata[[winterTimeCol]],
+  berlinTime <- kwb.datetime::berlinNormalTimeToBerlinLocalTime(winter_times)
+  utcTime <- kwb.datetime::berlinNormalTimeToUTC(winter_times)
+  
+  timesOnly <- kwb.utils::noFactorDataFrame(
+    BerlinDateTimeNoDST = winter_times,
     BerlinDateTime = berlinTime,
-    UTCOffset = kwb.datetime::utcOffset(berlinTime, utcTime),
-    stringsAsFactors = FALSE
+    UTCOffset = kwb.datetime::utcOffset(berlinTime, utcTime)
   )
   
-  dataOnly <- mydata[, -winterTimeCol, drop = FALSE]
-  
-  cbind(timesOnly, dataOnly)
+  cbind(timesOnly, mydata[, -winterTimeCol, drop = FALSE])
 }
 
 # insertUtcDateTimeColumn ------------------------------------------------------
@@ -67,19 +67,22 @@ completeTimeColumns <- function(
   cnames <- names(x)
   berlinTime <- NULL
   
-  if (.wantedButNotAvailable("BerlinDateTime", wanted, cnames)) {
+  if (wantedButNotAvailable("BerlinDateTime", wanted, cnames)) {
+    
     if ("BerlinDateTimeNoDST" %in% cnames) {
-      #berlinTime <- berlinWinterTimeToBerlinLocalTime(as.character(x$BerlinDateTimeNoDST))
-      #x$BerlinDateTime <- berlinTime$charLocal
-      x$BerlinDateTime <- kwb.datetime::berlinNormalTimeToBerlinLocalTime(as.character(x$BerlinDateTimeNoDST))
+      
+      x$BerlinDateTime <- kwb.datetime::berlinNormalTimeToBerlinLocalTime(
+        as.character(x$BerlinDateTimeNoDST)
+      )
     }
   }
   
-  if (.wantedButNotAvailable("UTCOffset", wanted, cnames)) {
+  if (wantedButNotAvailable("UTCOffset", wanted, cnames)) {
+    
     if (is.null(berlinTime) && "BerlinDateTimeNoDST" %in% cnames) {
-      #berlinTime <- berlinWinterTimeToBerlinLocalTime(as.character(x$BerlinDateTimeNoDST))
-      #x$UTCOffset <- berlinTime$utcOffset
+      
       bnt <- as.character(x$BerlinDateTimeNoDST)
+      
       x$UTCOffset <- kwb.datetime::utcOffset(
         kwb.datetime::berlinNormalTimeToBerlinLocalTime(bnt),
         kwb.datetime::berlinNormalTimeToUTC(bnt)
@@ -87,18 +90,20 @@ completeTimeColumns <- function(
     }
   }
   
-  if (.wantedButNotAvailable("DateTimeUTC", wanted, cnames)) {
+  if (wantedButNotAvailable("DateTimeUTC", wanted, cnames)) {
+    
     if ("BerlinDateTimeNoDST" %in% cnames) {
-      #utcTime <- berlinWinterTimeToUTC(as.character(x$BerlinDateTimeNoDST))
-      #x$DateTimeUTC <- utcTime$charUTC
-      x$DateTimeUTC <- kwb.datetime::berlinNormalTimeToUTC(as.character(x$BerlinDateTimeNoDST))
+      
+      x$DateTimeUTC <- kwb.datetime::berlinNormalTimeToUTC(
+        as.character(x$BerlinDateTimeNoDST)
+      )
     }
   }
   x
 }
 
-# .wantedButNotAvailable -------------------------------------------------------
-.wantedButNotAvailable <- function(cname, wanted, available)
+# wantedButNotAvailable --------------------------------------------------------
+wantedButNotAvailable <- function(cname, wanted, available)
 {
   cname %in% wanted & !(cname %in% available)
 }
