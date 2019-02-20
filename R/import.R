@@ -37,10 +37,9 @@ prepareSingleVariableDataValuesForOdm <- function(
 
   kwb.utils::printIf(dbg, utils::head(dataValues))
 
-  dataValues <- kwb.utils::hsRenameColumns(
-    dataValues,
-    list(BerlinDateTime = "LocalDateTime")
-  )
+  dataValues <- kwb.utils::renameColumns(dataValues, list(
+    BerlinDateTime = "LocalDateTime"
+  ))
 
   kwb.utils::printIf(dbg, utils::head(dataValues))
 

@@ -35,7 +35,7 @@ getHQSeriesFromCSV <- function(
   myData <- kwb.logger::readLogger_Ori_MLog(srcfile, sep = sep, timeFormat = timeFormat, ...)
   
   if ("Level_cm" %in% names(myData)) {
-    myData <- kwb.utils::hsRenameColumns(myData, list(Level_cm = "Hraw_cm"))
+    myData <- kwb.utils::renameColumns(myData, list(Level_cm = "Hraw_cm"))
   }
   
   if (!"Hraw_m" %in% names(myData)) {
@@ -43,7 +43,7 @@ getHQSeriesFromCSV <- function(
     
     # convert cm to m and rename column
     myData$Hraw_cm <- myData$Hraw_cm / 100
-    myData <- kwb.utils::hsRenameColumns(myData, list(Hraw_cm = "Hraw_m"))
+    myData <- kwb.utils::renameColumns(myData, list(Hraw_cm = "Hraw_m"))
   }
   
   hdat <- data.frame(

@@ -18,7 +18,7 @@ reformatEvents <- function(events)
 {
   events <- kwb.event::hsEventsToUnit(events, tUnit = "min")
   
-  events <- kwb.utils::hsRenameColumns(events, list(
+  events <- kwb.utils::renameColumns(events, list(
     tBeg = "Ereignisbeginn_UTC",
     tEnd = "Ereignisende_UTC",
     dur = "Dauer_min",
