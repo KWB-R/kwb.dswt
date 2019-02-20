@@ -49,3 +49,56 @@ insertUtcDateTimeColumn <- function(mydata)
   
   cbind(mydata, DateTimeUTC = utcTime, stringsAsFactors = FALSE)
 }
+
+# completeTimeColumns ----------------------------------------------------------
+
+#' Complete Time Columns
+#' 
+#' @param x data frame with time columns
+#' @param wanted Default: c("BerlinDateTime", "UTCOffset", "DateTimeUTC")
+#' 
+#' @return (Hopefully) data frame with columns \emph{BerlinDateTimeNoDST},
+#'   \emph{BerlinDateTime}, \emph{UTCOffset}, \emph{DateTimeUTC},
+#' 
+completeTimeColumns <- function(
+  x, wanted = c("BerlinDateTime", "UTCOffset", "DateTimeUTC")
+)
+{
+  cnames <- names(x)
+  berlinTime <- NULL
+  
+  if (.wantedButNotAvailable("BerlinDateTime", wanted, cnames)) {
+    if ("BerlinDateTimeNoDST" %in% cnames) {
+      #berlinTime <- berlinWinterTimeToBerlinLocalTime(as.character(x$BerlinDateTimeNoDST))
+      #x$BerlinDateTime <- berlinTime$charLocal
+      x$BerlinDateTime <- kwb.datetime::berlinNormalTimeToBerlinLocalTime(as.character(x$BerlinDateTimeNoDST))
+    }
+  }
+  
+  if (.wantedButNotAvailable("UTCOffset", wanted, cnames)) {
+    if (is.null(berlinTime) && "BerlinDateTimeNoDST" %in% cnames) {
+      #berlinTime <- berlinWinterTimeToBerlinLocalTime(as.character(x$BerlinDateTimeNoDST))
+      #x$UTCOffset <- berlinTime$utcOffset
+      bnt <- as.character(x$BerlinDateTimeNoDST)
+      x$UTCOffset <- kwb.datetime::utcOffset(
+        kwb.datetime::berlinNormalTimeToBerlinLocalTime(bnt),
+        kwb.datetime::berlinNormalTimeToUTC(bnt)
+      )
+    }
+  }
+  
+  if (.wantedButNotAvailable("DateTimeUTC", wanted, cnames)) {
+    if ("BerlinDateTimeNoDST" %in% cnames) {
+      #utcTime <- berlinWinterTimeToUTC(as.character(x$BerlinDateTimeNoDST))
+      #x$DateTimeUTC <- utcTime$charUTC
+      x$DateTimeUTC <- kwb.datetime::berlinNormalTimeToUTC(as.character(x$BerlinDateTimeNoDST))
+    }
+  }
+  x
+}
+
+# .wantedButNotAvailable -------------------------------------------------------
+.wantedButNotAvailable <- function(cname, wanted, available)
+{
+  cname %in% wanted & !(cname %in% available)
+}
