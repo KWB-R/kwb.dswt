@@ -2,6 +2,12 @@
 
 #' Prepare Single Variable Data Values for ODM
 #' 
+#' @param dataFrame data frame containing the data
+#' @param colName column name
+#' @param noDataValue value indicating "no data", default: -9999
+#' @param dbg logical. If \code{TRUE}, debug messages are shown
+#' 
+#' @export
 prepareSingleVariableDataValuesForOdm <- function(
   dataFrame, colName, noDataValue = -9999, dbg = TRUE
 )

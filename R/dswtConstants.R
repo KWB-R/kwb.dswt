@@ -4,6 +4,8 @@
 #' 
 #' Default "dictionary" file describing the folder structure to be used in DSWT
 #' 
+#' @return path to path dictionary file stored in the (installed) package
+#' @export
 DSWT_DICTIONARY_FILE <- function()
 {
   system.file("extdata", "dswtPathDictionary.txt", package = "kwb.dswt")
@@ -19,7 +21,7 @@ DSWT_DICTIONARY_FILE <- function()
 #'
 #' @return list of named elements with names corresponding to the monitoring
 #'   site and the value corresponding to the offest in metres.
-#'   
+#' @export 
 DSWT_H_OFFSETS <- function()
 {
   list(
@@ -51,6 +53,8 @@ DSWT_H_OFFSETS_SINCE <- function()
 #' 
 #' Containing e.g. a file name pattern
 #' 
+#' @return list mapping keywords to file name patterns
+#' @export
 DSWT_FILE_TYPES <- function()
 {
   to_pattern <- function(x) list(pattern = x)
@@ -73,7 +77,11 @@ DSWT_FILE_TYPES <- function()
 
 # DSWT_BWB_CODE_TO_SITE_CODE ---------------------------------------------------
 
-#' DSWT_BWB_CODE_TO_SITE_CODE
+#' Map BWB Rain Gauge Names to DSWT SiteCodes
+#' 
+#' @return list with BWB names as element names and DSWT SiteCodes as elements
+#' @export
+#' 
 DSWT_BWB_CODE_TO_SITE_CODE <- function() 
 {
   # T = Treffurter Str., C = Clayallee 
@@ -92,9 +100,12 @@ DSWT_BWB_CODE_TO_SITE_CODE <- function()
 
 # DSWT_RAIN_GAUGES -------------------------------------------------------------
 
-#' DSWT_RAIN_GAUGES
+#' Rain Gauges Used in DSWT Project
+#' 
 #' @return data frame with columns \emph{FUB_STATION}, \emph{FUB_SHORT}, 
-#'   \emph{BWB_SHORT}       
+#'   \emph{BWB_SHORT}
+#'   
+#' @export
 #' 
 DSWT_RAIN_GAUGES <- function()
 {
@@ -109,9 +120,11 @@ DSWT_RAIN_GAUGES <- function()
 
 # DSWT_SITES -------------------------------------------------------------------
 
-#' DSWT_SITES
+#' Names of Sites Monitored in DSWT Project
 #' 
 #' @return named vector of SiteID values in ODM database
+#' 
+#' @export
 #' 
 DSWT_SITES <- function() 
 {
@@ -142,7 +155,12 @@ DSWT_SITES <- function()
 
 # DSWT_TIMESERIES --------------------------------------------------------------
 
-#' DSWT_TIMESERIES
+#' Foreign Keys Identifying Time Series in the ODM Data Model
+#' 
+#' @return list of lists
+#' 
+#' @export
+#' 
 DSWT_TIMESERIES <- function()
 {
   list(
@@ -181,6 +199,9 @@ DSWT_TIMESERIES <- function()
 
 #' Key Field Values in DSWT Project
 #' 
+#' @return A list with each entry representing a time series, i.e. the 
+#'   measurement of one variable at one site.
+#' @export
 keyFields_DSWT <- function()
 {
   dswtTimeseries <- DSWT_TIMESERIES()

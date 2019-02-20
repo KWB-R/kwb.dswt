@@ -126,7 +126,9 @@ removeLinesBeforeYear <- function(sampleData, year)
 #' @param removePattern regular expression pattern matching logged actions to be
 #'   removed before plotting. Set to "" in order not to remove any action
 #' @param to.pdf if TRUE, graphical output is directed to PDF
-#' 
+#' @param evtSepTime event separation time in seconds. Minimum time of 
+#'   "no signal" between two distinct events.
+#' @export
 readAndPlotAutoSamplerFiles <- function(
   filePaths,
   removePattern = "Power|Bluetooth|Modem|SMS|Sonde",
@@ -140,8 +142,9 @@ readAndPlotAutoSamplerFiles <- function(
   # Remove actions of a certain type
   if (removePattern != "") {
 
-    actions.to.remove <- grep(removePattern, unique(all.actions$Ereignis),
-                              value=TRUE)
+    actions.to.remove <- grep(
+      removePattern, unique(all.actions$Ereignis), value = TRUE
+    )
 
     actions <- all.actions[!all.actions$Ereignis %in% actions.to.remove, ]
   }

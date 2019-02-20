@@ -49,6 +49,11 @@ getLevelFilesInfo <- function(levelDataFiles, new.format = NULL)
 #' 
 #' @param levelData data frame with columns \emph{myDateTime} (character),
 #'   \emph{file}, \emph{row}, as returned by \code{\link{readAllLevelFiles}}
+#'   
+#' @return data frame with columns \code{file},\code{rows}, \code{min}, 
+#'   \code{first}, \code{last}, \code{max}
+#' 
+#' @export
 #' 
 getLevelFilesInfo2 <- function(levelData)
 {
@@ -90,6 +95,10 @@ getLevelFileInfo <- function(filePath, sep = ";", timeFormat = NULL)
 
 #' Create Information on Water Level File
 #' 
+#' @param filePath path to water level file
+#' @param timestamps vector of timestamps (read from the file?)
+#' 
+#' @export
 toLevelFileInfo <- function(filePath, timestamps)
 {
   data.frame(

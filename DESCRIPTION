@@ -29,7 +29,11 @@ Imports:
     kwb.logger
 Suggests: 
     covr,
-    RCurl
+    knitr,
+    kwb.fakin,
+    kwb.code,
+    RCurl,
+    rmarkdown
 Remotes: 
     github::kwb-r/kwb.utils,
     github::kwb-r/kwb.datetime,
@@ -40,3 +44,5 @@ Remotes:
     github::kwb-r/kwb.logger
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 6.1.1
+VignetteBuilder: knitr

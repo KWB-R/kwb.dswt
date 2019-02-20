@@ -2,6 +2,11 @@
 
 #' Read all Level Files
 #' 
+#' @param levelFiles vector of file paths
+#' @param dbg if \code{TRUE}, debug messages are shown.
+#' 
+#' @export
+#' 
 readAllLevelFiles <- function(levelFiles, dbg = TRUE)
 {
   levelData <- NULL
@@ -35,7 +40,12 @@ readAllLevelFiles <- function(levelFiles, dbg = TRUE)
 # getLevelFilesForSite ---------------------------------------------------------
 
 #' Level Files for Site
-#' 
+
+#' @param config configuration object (list) with elements "dictionaryFile" and
+#'   elements required by \code{\link[kwb.monitoring]{pathDictionary}}
+#' @param station name of monitoring station
+#' @return vector of file paths
+#' @export
 getLevelFilesForSite <- function(config, station)
 {
   config$station <- station
@@ -60,7 +70,8 @@ getLevelFilesForSite <- function(config, station)
 #' @param srcdir source directory
 #' @param filetype one of the file types contained in DSWT_FILE_TYPES
 #' @param recursive search in subdirectories?
-#' 
+#' @return vector of file paths
+#' @export
 getDswtFilePaths <- function(srcdir, filetype, recursive = FALSE)
 {
   srcfiles <- dir(srcdir, pattern = filetype$pattern, full.names = TRUE,
@@ -79,11 +90,16 @@ getDswtFilePaths <- function(srcdir, filetype, recursive = FALSE)
 
 #' List Uploaded Files
 #' 
+#' @param full.names if \code{TRUE} the full absolute URLs are returned, 
+#'   otherwise only the relative paths.
+#'   
 #' @return list with elements \emph{PN}, \emph{H}, \emph{RD}, \emph{F},
 #'   \emph{LPR}, \emph{Q}, \emph{BPR} containing URLs to sampler files, water
 #'   level files, rain data files, photos, laboratory protocol files, discharge
 #'   files and operation protocol files, respectively, that are available at the
 #'   DSWT server at sysprovide.de
+#'   
+#' @export
 #' 
 dirUploadedFiles <- function(full.names = FALSE)
 {
@@ -156,6 +172,8 @@ dirFtpPath <- function(url, userpwd, full.names = FALSE)
 #'   (corrected height [= measured height minus offset] in m),\emph{Q_L_s}
 #'   (calculated discharge in L/s). If \emph{addTimeColumns} is TRUE the columns
 #'   \emph{BerlinDateTime} and \emph{UTCOffset} will be added.
+#'   
+#' @export
 #' 
 getHQSeriesFromCSV <- function(
   srcfile, DN, sep = "\t", timeFormat = NULL, hoffset = 0.02,
@@ -232,6 +250,8 @@ correctHandCalculateQ <- function(hdat, hoffset, DN)
 #' @return data frame with additional columns \emph{BerlinDateTime} (character),
 #'   \emph{UTCOffset} (numeric)
 #' 
+#' @export
+#' 
 insertLocalDateTimeColumns <- function(mydata)
 {
   colname <- "BerlinDateTimeNoDST"
@@ -260,7 +280,11 @@ insertLocalDateTimeColumns <- function(mydata)
 
 #' Insert DateTimeUTC Column
 #' 
+#' @param mydata data frame with column \code{BerlinDateTimeNoDST}
+#' 
 #' @return mydata with additional column \emph{DateTimeUTC}
+#' 
+#' @export
 #' 
 insertUtcDateTimeColumn <- function(mydata)
 {
@@ -328,6 +352,8 @@ completeTimeColumns <- function(
 #'
 #' @return \emph{events} with columns \emph{V_m3} and \emph{maxQ_L_s} added
 #' 
+#' @export
+#' 
 addTotalVolumeAndMaxQ <- function(
   qValues, events, eventnr, digitsV = 3, digitsMaxQ = 3
 )
@@ -361,6 +387,8 @@ addTotalVolumeAndMaxQ <- function(
 #'   \emph{pAfter} renamed \emph{Pause_danach_min} and original columns
 #'   \emph{iBeg} and \emph{iEnd} removed
 #' 
+#' @export
+#' 
 reformatEvents <- function(events)
 {
   events <- hsEventsToUnit(events, tUnit="min")
@@ -385,6 +413,8 @@ reformatEvents <- function(events)
 #' @param sep column separator. Default: ";"
 #' @param dec decimal character. Default: "."
 #' 
+#' @export
+#' 
 writeHQSeriesToCSV <- function(hqSeries, csv, sep = ";", dec = ",")
 {
   cat("*** Writing HQ time series to", kwb.utils::windowsPath(csv), "... ")
@@ -403,6 +433,8 @@ writeHQSeriesToCSV <- function(hqSeries, csv, sep = ";", dec = ",")
 #' @param sep column separator. Default: ";"
 #' @param dec decimal character. Default: "."
 #' 
+#' @export
+#' 
 writeEventListToCSV <- function(events, csv, sep = ";", dec = ",")
 {
   cat("*** Writing event list to", kwb.utils::windowsPath(csv), "... ")
@@ -420,7 +452,7 @@ writeEventListToCSV <- function(events, csv, sep = ";", dec = ",")
 #'   it is created
 #' 
 #' @return path to subfolder "DSWT" in tempdir()
-#' 
+#' @export
 dswtdir <- function()
 {
   mydir <- file.path(tempdir(), "dswt")
@@ -439,6 +471,8 @@ dswtdir <- function()
 #' Validate H-Q-Relationships
 #' 
 #' Validate HQ relationships for DN = 150 and DN = 300
+#' 
+#' @export
 #' 
 validate_HQ_relationships <- function()
 {
@@ -661,16 +695,28 @@ Q_to_H <- function(Q, DN)
 }
 
 # .siteNameToDN ----------------------------------------------------------------
+
+#' Find DN for Given Site
+#' 
+#' @param sitename name of monitoring site
+#' @export
 .siteNameToDN <- function(sitename) {
+  
   if (kwb.utils::isNullOrEmpty(sitename)) {
     stop("No sitename given!")
   }
+  
   DNs <- list(T = 300, C = 150)
+  
   sitegroupCode <- substr(sitename, 1, 1)
+  
   if (!(sitegroupCode %in% names(DNs))) {
     stop("No DN given for sitename: ", sitename)
   }
+  
   DN <- DNs[[sitegroupCode]]
+  
   cat("DN at site", sitename, ":", DN, "\n")
+  
   DN
 }
