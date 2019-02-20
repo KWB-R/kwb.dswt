@@ -2,6 +2,10 @@
 
 #' List Uploaded Files
 #' 
+#' You need to set the system environment variable "DSWT_FTP_LOGIN" to "user:pwd"
+#' where "user" is the username and "pwd" the password for the account that is
+#' allowed to access the FTP server where the files are stored.
+#' 
 #' @param full.names if \code{TRUE} the full absolute URLs are returned, 
 #'   otherwise only the relative paths.
 #'   
@@ -42,18 +46,26 @@ dirUploadedFiles <- function(full.names = FALSE)
 dirFtpPath <- function(url, userpwd, full.names = FALSE)
 {
   if (! requireNamespace("RCurl", quietly = TRUE)) {
-    stop("Please install the package 'RCurl' first with ",
-         "install.packages(\"RCurl\") in order to run dirFtpPath()")
+    
+    stop(
+      "Please install the package 'RCurl' first with ",
+      "install.packages(\"RCurl\") in order to run dirFtpPath()", 
+      call. = FALSE
+    )
   }
   
-  filenames <- RCurl::getURL(url, userpwd = userpwd, ftp.use.epsv = FALSE,
-                             dirlistonly = TRUE)
-  filenames <- strsplit(filenames, "\r\n")[[1]]
-  filenames <- setdiff(filenames, c(".", ".."))
+  filenames <- RCurl::getURL(
+    url, userpwd = userpwd, ftp.use.epsv = FALSE, dirlistonly = TRUE
+  )
+  
+  filenames <- setdiff(strsplit(filenames, "\r?\n")[[1]], c(".", ".."))
   
   if (full.names) {
-    filenames <- file.path(sub("/$", "", url), filenames)
+    
+    file.path(sub("/$", "", url), filenames)
+    
+  } else {
+    
+    filenames
   }
-  
-  filenames
 }
