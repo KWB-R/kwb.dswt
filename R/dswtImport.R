@@ -1,7 +1,8 @@
 # prepareSingleVariableDataValuesForOdm ----------------------------------------
-prepareSingleVariableDataValuesForOdm <- function # prepareSingleVariableDataValuesForOdm
-### prepareSingleVariableDataValuesForOdm
-(
+
+#' Prepare Single Variable Data Values for ODM
+#' 
+prepareSingleVariableDataValuesForOdm <- function(
   dataFrame, colName, noDataValue = -9999, dbg = TRUE
 )
 {
@@ -43,4 +44,3 @@ prepareSingleVariableDataValuesForOdm <- function # prepareSingleVariableDataVal
 
   dataValues
 }
-

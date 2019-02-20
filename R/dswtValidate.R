@@ -1,9 +1,8 @@
 # formatLevelFileInfo ----------------------------------------------------------
-formatLevelFileInfo <- function # formatLevelFileInfo
-### formatLevelFileInfo
-(
-  levelFileInfo, new.format = NULL
-)
+
+#' Format Level File Info
+#' 
+formatLevelFileInfo <- function(levelFileInfo, new.format = NULL)
 {
   if (is.null(new.format)) {
     new.format <- "%d.%m.%y %H:%M"
@@ -26,12 +25,10 @@ formatLevelFileInfo <- function # formatLevelFileInfo
 }
 
 # getLevelFilesInfo ------------------------------------------------------------
-getLevelFilesInfo <- function # getLevelFilesInfo
-### getLevelFilesInfo
-(
-  levelDataFiles,
-  new.format = NULL
-)
+
+#' Get Level Files Info
+#' 
+getLevelFilesInfo <- function(levelDataFiles, new.format = NULL)
 {
   if (is.null(new.format)) {
     new.format <- "%d.%m.%y %H:%M"
@@ -47,13 +44,13 @@ getLevelFilesInfo <- function # getLevelFilesInfo
 }
 
 # getLevelFilesInfo2 -----------------------------------------------------------
-getLevelFilesInfo2 <- function # getLevelFilesInfo2
-### getLevelFilesInfo2
-(
-  levelData
-  ### data frame with columns \emph{myDateTime} (character), \emph{file},
-  ### \emph{row}, as returned by \code{\link{readAllLevelFiles}}
-)
+
+#' Get Level Files Info 2
+#' 
+#' @param levelData data frame with columns \emph{myDateTime} (character),
+#'   \emph{file}, \emph{row}, as returned by \code{\link{readAllLevelFiles}}
+#' 
+getLevelFilesInfo2 <- function(levelData)
 {
   levelData$myDateTime <- hsToPosix(levelData$myDateTime)
   
@@ -66,17 +63,15 @@ getLevelFilesInfo2 <- function # getLevelFilesInfo2
     first = toUTC(aggregate(levelData$myDateTime, by = by, FUN = head, 1)$x),
     last  = toUTC(aggregate(levelData$myDateTime, by = by, FUN = tail, 1)$x),
     max   = toUTC(aggregate(levelData$myDateTime, by = by, FUN = max)$x),
-    stringsAsFactors = FALSE)
+    stringsAsFactors = FALSE
+  )
 }
 
 # getLevelFileInfo -------------------------------------------------------------
-getLevelFileInfo <- function # getLevelFileInfo
-### getLevelFileInfo
-(
-  filePath, 
-  sep = ";",
-  timeFormat = NULL
-)
+
+#' Get Level File Info
+#' 
+getLevelFileInfo <- function(filePath, sep = ";", timeFormat = NULL)
 {
   if (is.null(timeFormat)) {
     timeFormat <- c("%d.%m.%Y %H:%M:%S", "%d.%m.%Y %H:%M")
@@ -92,29 +87,31 @@ getLevelFileInfo <- function # getLevelFileInfo
 }
 
 # toLevelFileInfo --------------------------------------------------------------
-toLevelFileInfo <- function # toLevelFileInfo
-### toLevelFileInfo
-(
-  filePath, timestamps
-)
+
+#' Create Information on Water Level File
+#' 
+toLevelFileInfo <- function(filePath, timestamps)
 {
-  data.frame(file = basename(filePath), 
-             kB = round(file.info(filePath)$size/1024, 1),
-             rows = length(timestamps),
-             getTimestampStatistics(timestamps),
-             stringsAsFactors = FALSE)
+  data.frame(
+    file = basename(filePath), 
+    kB = round(file.info(filePath)$size / 1024, 1),
+    rows = length(timestamps),
+    getTimestampStatistics(timestamps),
+    stringsAsFactors = FALSE
+  )
 }
 
 # getTimestampStatistics -------------------------------------------------------
-getTimestampStatistics <- function # getTimestampStatistics
-### getTimestampStatistics
-(
-  timestamps
-)
+
+#' Get Timestamp Statistics
+#' 
+getTimestampStatistics <- function(timestamps)
 {  
-  data.frame(min = min(timestamps), 
-             first = head(timestamps, 1), 
-             last = tail(timestamps, 1), 
-             max = max(timestamps), 
-             stringsAsFactors = FALSE)
+  data.frame(
+    min = min(timestamps), 
+    first = head(timestamps, 1), 
+    last = tail(timestamps, 1), 
+    max = max(timestamps), 
+    stringsAsFactors = FALSE
+  )
 }

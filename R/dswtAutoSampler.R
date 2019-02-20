@@ -1,10 +1,8 @@
 # readDswtSamplerFileByName ----------------------------------------------------
-readDswtSamplerFileByName <- function # readDswtSamplerFileByName
-### readDswtSamplerFileByName
-(
-  samplerFile,
-  bottlesToConsider
-)
+
+#' Read File from Autosampler Used in Project DSWT
+#' @keywords intern
+readDswtSamplerFileByName <- function(samplerFile, bottlesToConsider)
 {
   cat(sprintf("Reading sample data from \"%s\"... ", basename(samplerFile)))
 
@@ -99,12 +97,10 @@ readDswtSamplerFileByName <- function # readDswtSamplerFileByName
 }
 
 # removeLinesBeforeYear --------------------------------------------------------
-removeLinesBeforeYear <- function # removeLinesBeforeYear
-### removeLinesBeforeYear
-(
-  sampleData,
-  year
-)
+
+#' Remove Lines Before Year
+#' @keywords intern
+removeLinesBeforeYear <- function(sampleData, year)
 {
   before <- which(as.integer(substr(sampleData$myDateTime, 1, 4)) < year)
 
@@ -122,17 +118,20 @@ removeLinesBeforeYear <- function # removeLinesBeforeYear
 }
 
 # readAndPlotAutoSamplerFiles --------------------------------------------------
-readAndPlotAutoSamplerFiles <- function # readAndPlotAutoSamplerFiles
-### readAndPlotAutoSamplerFiles
-(
+
+#' Read and Plot Autosampler Files
+#' 
+#' @param filePaths full path(s) to ORI Auto sampler log files
+#'   PN_<yyyymmdd>_<station>.csv
+#' @param removePattern regular expression pattern matching logged actions to be
+#'   removed before plotting. Set to "" in order not to remove any action
+#' @param to.pdf if TRUE, graphical output is directed to PDF
+#' 
+readAndPlotAutoSamplerFiles <- function(
   filePaths,
-  ### full path(s) to ORI Auto sampler log files PN_<yyyymmdd>_<station>.csv
   removePattern = "Power|Bluetooth|Modem|SMS|Sonde",
-  ### regular expression pattern matching logged actions to be removed before
-  ### plotting. Set to "" in order not to remove any action
   to.pdf = TRUE,
-  ### if TRUE, graphical output is directed to PDF
-  evtSepTime = 30*60
+  evtSepTime = 30 * 60
 )
 {
   # Read all auto sampler actions from all files
@@ -152,12 +151,13 @@ readAndPlotAutoSamplerFiles <- function # readAndPlotAutoSamplerFiles
 }
 
 # getActionsFromAutoSamplerFiles -----------------------------------------------
-getActionsFromAutoSamplerFiles <- function # getActionsFromAutoSamplerFiles
-### getActionsFromAutoSamplerFiles
-(
-  pnFiles
-  ### full path(s) to ORI Auto sampler log files PN_<yyyymmdd>_<station>.csv
-)
+
+#' Get Actions from Autosampler Files
+#' 
+#' @param pnFiles full path(s) to ORI Auto sampler log files
+#'   PN_<yyyymmdd>_<station>.csv
+#' 
+getActionsFromAutoSamplerFiles <- function(pnFiles)
 {
   all.actions <- NULL
 
@@ -170,16 +170,17 @@ getActionsFromAutoSamplerFiles <- function # getActionsFromAutoSamplerFiles
 }
 
 # getActionsFromAutoSamplerFile ------------------------------------------------
-getActionsFromAutoSamplerFile <- function # getActionsFromAutoSamplerFile
-### getActionsFromAutoSamplerFile
-(
-  pnFile,
-  ### full path to ORI Auto sampler log files PN_<yyyymmdd>_<station>.csv
-  fileNumber = 1,
-  ### file number (will be included in the plot title). Useful if this function
-  ### is called in a sequence for multiple files.
-  remove.errors = FALSE
-  ### if TRUE, actions containing "Fehler" are removed
+
+#' Get Actions from Autosampler File
+#' 
+#' @param pnFile full path to ORI Auto sampler log files
+#'   PN_<yyyymmdd>_<station>.csv
+#' @param fileNumber file number (will be included in the plot title). Useful if
+#'   this function is called in a sequence for multiple files.
+#' @param remove.errors if TRUE, actions containing "Fehler" are removed
+#' 
+getActionsFromAutoSamplerFile <- function(
+  pnFile, fileNumber = 1, remove.errors = FALSE
 )
 {
   stopifnot(length(pnFile) == 1)
@@ -248,13 +249,11 @@ getActionsFromAutoSamplerFile <- function # getActionsFromAutoSamplerFile
 }
 
 # plotAllAutoSamplerActions ----------------------------------------------------
-plotAllAutoSamplerActions <- function # plotAllAutoSamplerActions
-### plotAllAutoSamplerActions
-(
-  all.actions,
-  to.pdf = TRUE,
-  group.size = 6,
-  evtSepTime = 30*60
+
+#' Plot all Autosampler Actions
+#' 
+plotAllAutoSamplerActions <- function(
+  all.actions, to.pdf = TRUE, group.size = 6, evtSepTime = 30 * 60
 )
 {
   PDF <- kwb.utils::preparePdfIf(to.pdf, landscape = TRUE)
@@ -274,11 +273,12 @@ plotAllAutoSamplerActions <- function # plotAllAutoSamplerActions
 }
 
 # plotAutoSamplerActions -------------------------------------------------------
-plotAutoSamplerActions <- function # plotAutoSamplerActions
-### plotAutoSamplerActions
-(
-  actions, fileNumber, subevents.per.page = 3, density=20, context=c(0, 0.12),
-  evtSepTime = 30*60, ...
+
+#' Plot Autosampler Actions
+#' 
+plotAutoSamplerActions <- function(
+  actions, fileNumber, subevents.per.page = 3, density = 20, 
+  context = c(0, 0.12), evtSepTime = 30 * 60, ...
 )
 {
   graphicalParameters <- par(no.readonly=TRUE)
@@ -372,10 +372,13 @@ plotAutoSamplerActions <- function # plotAutoSamplerActions
 }
 
 # logEventToLabelInfo ----------------------------------------------------------
-logEventToLabelInfo <- function
-### labels and colours dependent on "Ereignis"
-(
-  ereignis, x, colour.error="red", colour.sample = "blue"
+
+#' Create Label and Colour Information from Event
+#' 
+#' @return list with elements \emph{labels} and \emph{colours}
+#' 
+logEventToLabelInfo <- function(
+  ereignis, x, colour.error = "red", colour.sample = "blue"
 )
 {
   indices.sample <- grep("Probe", ereignis)
@@ -393,7 +396,4 @@ logEventToLabelInfo <- function
 
   list(labels = ereignis,
        colours = textColours)
-
-  ### list with elements \emph{labels} and \emph{colours}
 }
-
