@@ -1,0 +1,51 @@
+# insertLocalDateTimeColumns ---------------------------------------------------
+
+#' Insert LocalDateTime Columns
+#' 
+#' @param mydata data frame with character column \emph{BerlinDateTimeNoDST}
+#' 
+#' @return data frame with additional columns \emph{BerlinDateTime} (character),
+#'   \emph{UTCOffset} (numeric)
+#' 
+#' @export
+#' 
+insertLocalDateTimeColumns <- function(mydata)
+{
+  colname <- "BerlinDateTimeNoDST"
+  winterTimeCol <- which(names(mydata) == colname)
+  
+  if(length(winterTimeCol) != 1) {
+    stop(sprintf("No column \"%s\" found in data frame \"mydata\"!", colname))
+  }
+  
+  berlinTime <- kwb.datetime::berlinNormalTimeToBerlinLocalTime(mydata[[winterTimeCol]])
+  utcTime <- kwb.datetime::berlinNormalTimeToUTC(mydata[[winterTimeCol]])
+  
+  timesOnly <- data.frame(
+    BerlinDateTimeNoDST = mydata[[winterTimeCol]],
+    BerlinDateTime = berlinTime,
+    UTCOffset = kwb.datetime::utcOffset(berlinTime, utcTime),
+    stringsAsFactors = FALSE
+  )
+  
+  dataOnly <- mydata[, -winterTimeCol, drop = FALSE]
+  
+  cbind(timesOnly, dataOnly)
+}
+
+# insertUtcDateTimeColumn ------------------------------------------------------
+
+#' Insert DateTimeUTC Column
+#' 
+#' @param mydata data frame with column \code{BerlinDateTimeNoDST}
+#' 
+#' @return mydata with additional column \emph{DateTimeUTC}
+#' 
+#' @export
+#' 
+insertUtcDateTimeColumn <- function(mydata)
+{
+  utcTime <- kwb.datetime::berlinNormalTimeToUTC(mydata$BerlinDateTimeNoDST)
+  
+  cbind(mydata, DateTimeUTC = utcTime, stringsAsFactors = FALSE)
+}
