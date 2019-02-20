@@ -187,6 +187,11 @@ usage <- kwb.fakin::get_package_function_usage(
 # Show the table of function usage
 usage
 ```
+
+```{r echo = FALSE}
+usage
+```
+
 ```{r eval = FALSE, include = FALSE}
 write.csv(usage, "~/HAUKE/R/kwb.dswt/inst/extdata/function_usage.R")
 ```

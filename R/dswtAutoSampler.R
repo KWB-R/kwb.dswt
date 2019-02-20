@@ -1,7 +1,7 @@
 # readDswtSamplerFileByName ----------------------------------------------------
 
 #' Read File from Autosampler Used in Project DSWT
-#' @keywords intern
+#' @keywords internal
 readDswtSamplerFileByName <- function(samplerFile, bottlesToConsider)
 {
   cat(sprintf("Reading sample data from \"%s\"... ", basename(samplerFile)))
@@ -41,8 +41,8 @@ readDswtSamplerFileByName <- function(samplerFile, bottlesToConsider)
   noWaterIndexToSampleIndex <- function(i) {
 
     secondsBefore <-
-      as.integer(hsToPosix(sampleData.noWater$myDateTime[i])) -
-      as.integer(hsToPosix(sampleData.samples$myDateTime))
+      as.integer(kwb.datetime::hsToPosix(sampleData.noWater$myDateTime[i])) -
+      as.integer(kwb.datetime::hsToPosix(sampleData.samples$myDateTime))
 
     row.sample <- which(
       secondsBefore >= 0
@@ -99,7 +99,7 @@ readDswtSamplerFileByName <- function(samplerFile, bottlesToConsider)
 # removeLinesBeforeYear --------------------------------------------------------
 
 #' Remove Lines Before Year
-#' @keywords intern
+#' @keywords internal
 removeLinesBeforeYear <- function(sampleData, year)
 {
   before <- which(as.integer(substr(sampleData$myDateTime, 1, 4)) < year)
@@ -210,7 +210,7 @@ getActionsFromAutoSamplerFile <- function(
   }
 
   # Convert timestamps to POSIXct
-  actions$myDateTime <- hsToPosix(actions$myDateTime)
+  actions$myDateTime <- kwb.datetime::hsToPosix(actions$myDateTime)
 
   # Look for times before 2013
   invalid <- which(as.POSIXlt(actions$myDateTime)$year + 1900 < 2012)
@@ -254,7 +254,7 @@ getActionsFromAutoSamplerFile <- function(
 # plotAllAutoSamplerActions ----------------------------------------------------
 
 #' Plot all Autosampler Actions
-#' 
+#' @keywords internal
 plotAllAutoSamplerActions <- function(
   all.actions, to.pdf = TRUE, group.size = 6, evtSepTime = 30 * 60
 )
@@ -278,7 +278,7 @@ plotAllAutoSamplerActions <- function(
 # plotAutoSamplerActions -------------------------------------------------------
 
 #' Plot Autosampler Actions
-#' 
+#' @keywords internal
 plotAutoSamplerActions <- function(
   actions, fileNumber, subevents.per.page = 3, density = 20, 
   context = c(0, 0.12), evtSepTime = 30 * 60, ...
@@ -290,7 +290,9 @@ plotAutoSamplerActions <- function(
   fileName <- unique(actions$file)
   stopifnot(length(fileName) == 1)
 
-  subevents <- hsEvents(actions$myDateTime, evtSepTime=evtSepTime, signalWidth=1)
+  subevents <- kwb.event::hsEvents(
+    actions$myDateTime, evtSepTime = evtSepTime, signalWidth = 1
+  )
 
   #rowsPerPage <- min(c(subevents.per.page, nrow(subevents))) + 1
   rowsPerPage <- subevents.per.page + 1
@@ -315,7 +317,7 @@ plotAutoSamplerActions <- function(
 
       lastIndexOnPage <- min(numberOfSubevents, i+subevents.per.page-1)
 
-      ganttPlotEvents(
+      kwb.event::ganttPlotEvents(
         subevents, xlab = "", title = "Intervalle:", leftMargin = 0.05,
         density = density, ylim = c(0, 2), y1 = y1, y2 = y2, yLabel = 1.5,
         indicate=i:lastIndexOnPage, indicationColour = "red"
@@ -333,7 +335,7 @@ plotAutoSamplerActions <- function(
       graphics::par(mar = c(3, 3, 0, 1))
     }
 
-    actionsInEvent <- hsGetEvent(actions, subevents, i)
+    actionsInEvent <- kwb.event::hsGetEvent(actions, subevents, i)
 
     if (kwb.utils::isNullOrEmpty(actionsInEvent)) {
       print(actions)
@@ -345,7 +347,7 @@ plotAutoSamplerActions <- function(
 
     labelInfo <- logEventToLabelInfo(actionsInEvent$Ereignis, x)
 
-    limits <- eventLimits(subevents[i, ], context=context)
+    limits <- kwb.event::eventLimits(subevents[i, ], context=context)
 
     # Create plot area (empty plot)
     plot.args <- list(x = x,
@@ -360,25 +362,28 @@ plotAutoSamplerActions <- function(
 
     do.call(graphics::plot, plot.args)
 
-    #cat("\n*** Calling addTimeAxis with times:\n ", paste(myDateTime, collapse="\n  "), "...\n")
-    addTimeAxis(x, time.format="%H:%M", add.grid=TRUE)
+    kwb.plot::addTimeAxis(x, time.format = "%H:%M", add.grid = TRUE)
 
     # title to the left
     graphics::mtext(sprintf("Intervall %d", i), side = 2, line = 1)
 
     # indicate subevent limits (red dashed)
-    graphics::abline(v = eventToXLim(subevents[i, ]), col="red", lty = 2)
+    graphics::abline(
+      v = kwb.event::eventToXLim(subevents[i, ]), col = "red", lty = 2
+    )
 
     # labelling
-    addLabels(x,
-              labels = labelInfo$labels,
-              alternating = TRUE,
-              col = labelInfo$colours,
-              col.line="black",
-              lty = 1,
-              lty.horiz.line = 1, # plot horizontal line
-              bandheight = 0.4,
-              group.size = 6)
+    kwb.plot::addLabels(
+      x,
+      labels = labelInfo$labels,
+      alternating = TRUE,
+      col = labelInfo$colours,
+      col.line="black",
+      lty = 1,
+      lty.horiz.line = 1, # plot horizontal line
+      bandheight = 0.4,
+      group.size = 6
+    )
   }
 }
 
@@ -387,7 +392,7 @@ plotAutoSamplerActions <- function(
 #' Create Label and Colour Information from Event
 #' 
 #' @return list with elements \emph{labels} and \emph{colours}
-#' 
+#' @keywords internal
 logEventToLabelInfo <- function(
   ereignis, x, colour.error = "red", colour.sample = "blue"
 )

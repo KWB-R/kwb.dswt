@@ -114,7 +114,7 @@ DSWT_RAIN_GAUGES <- function()
     "Stg",  "Wil", "Wil a", "Zhl I"         # Clayallee
   )
   
-  bwbRainGauges <- BWB_RAIN_GAUGES()
+  bwbRainGauges <- kwb.read::BWB_RAIN_GAUGES()
   bwbRainGauges[bwbRainGauges$BWB_SHORT %in% bwbShortNames, ]
 }
 

@@ -1,7 +1,7 @@
 # formatLevelFileInfo ----------------------------------------------------------
 
 #' Format Level File Info
-#' 
+#' @keywords internal
 formatLevelFileInfo <- function(levelFileInfo, new.format = NULL)
 {
   if (is.null(new.format)) {
@@ -9,9 +9,11 @@ formatLevelFileInfo <- function(levelFileInfo, new.format = NULL)
   }
   
   for (columnName in c("min", "first", "last", "max")) {
-    formatted <- reformatTimestamp(levelFileInfo[[columnName]],
-                                   old.format="%Y-%m-%d %H:%M:%S",
-                                   new.format=new.format)
+    formatted <- kwb.datetime::reformatTimestamp(
+      levelFileInfo[[columnName]],
+      old.format="%Y-%m-%d %H:%M:%S",
+      new.format=new.format
+    )
     levelFileInfo[[columnName]] <- formatted
   }
   
@@ -27,7 +29,7 @@ formatLevelFileInfo <- function(levelFileInfo, new.format = NULL)
 # getLevelFilesInfo ------------------------------------------------------------
 
 #' Get Level Files Info
-#' 
+#' @keywords internal
 getLevelFilesInfo <- function(levelDataFiles, new.format = NULL)
 {
   if (is.null(new.format)) {
@@ -57,17 +59,17 @@ getLevelFilesInfo <- function(levelDataFiles, new.format = NULL)
 #' 
 getLevelFilesInfo2 <- function(levelData)
 {
-  levelData$myDateTime <- hsToPosix(levelData$myDateTime)
+  levelData$myDateTime <- kwb.datetime::hsToPosix(levelData$myDateTime)
   
   by <- list(levelData$file)
   
   data.frame(
     file  = unique(levelData$file),
     rows  = stats::aggregate(levelData$row, by = by, FUN = length)$x,
-    min   = toUTC(stats::aggregate(levelData$myDateTime, by = by, FUN = min)$x),
-    first = toUTC(stats::aggregate(levelData$myDateTime, by = by, FUN = utils::head, 1)$x),
-    last  = toUTC(stats::aggregate(levelData$myDateTime, by = by, FUN = utils::tail, 1)$x),
-    max   = toUTC(stats::aggregate(levelData$myDateTime, by = by, FUN = max)$x),
+    min   = kwb.datetime::toUTC(stats::aggregate(levelData$myDateTime, by = by, FUN = min)$x),
+    first = kwb.datetime::toUTC(stats::aggregate(levelData$myDateTime, by = by, FUN = utils::head, 1)$x),
+    last  = kwb.datetime::toUTC(stats::aggregate(levelData$myDateTime, by = by, FUN = utils::tail, 1)$x),
+    max   = kwb.datetime::toUTC(stats::aggregate(levelData$myDateTime, by = by, FUN = max)$x),
     stringsAsFactors = FALSE
   )
 }
@@ -75,7 +77,7 @@ getLevelFilesInfo2 <- function(levelData)
 # getLevelFileInfo -------------------------------------------------------------
 
 #' Get Level File Info
-#' 
+#' @keywords internal
 getLevelFileInfo <- function(filePath, sep = ";", timeFormat = NULL)
 {
   if (is.null(timeFormat)) {
@@ -113,7 +115,7 @@ toLevelFileInfo <- function(filePath, timestamps)
 # getTimestampStatistics -------------------------------------------------------
 
 #' Get Timestamp Statistics
-#' 
+#' @keywords internal
 getTimestampStatistics <- function(timestamps)
 {  
   data.frame(
