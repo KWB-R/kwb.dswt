@@ -19,22 +19,11 @@ dirUploadedFiles <- function(full.names = FALSE)
   subdirs <- c("PN", "H", "RD", "F", "LPR", "Q", "BPR")
   
   filepaths <- file.path(url, subdirs, "")
-  names(filepaths)   <- subdirs
-  
-  uploadedFiles <- list()
-  
-  for (subdir in subdirs) {
-    
-    filenames <- dirFtpPath(
-      filepaths[subdir], 
-      userpwd = Sys.getenv()["DSWT_FTP_LOGIN"],
-      full.names
-    )
-    
-    uploadedFiles[[subdir]] <- filenames
-  }
-  
-  uploadedFiles
+
+  # Get user name and password from environment variable
+  userpwd <- Sys.getenv()["DSWT_FTP_LOGIN"]
+
+  stats::setNames(lapply(filepaths, dirFtpPath, userpwd, full.names), subdirs)
 }
 
 # dirFtpPath -------------------------------------------------------------------
