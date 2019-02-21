@@ -35,13 +35,15 @@ Suggests:
     RCurl,
     rmarkdown
 Remotes: 
-    github::kwb-r/kwb.utils,
+    github::kwb-r/kwb.code,
     github::kwb-r/kwb.datetime,
     github::kwb-r/kwb.event,
+    github::kwb-r/kwb.fakin,    
+    github::kwb-r/kwb.logger
+    github::kwb-r/kwb.monitoring,
     github::kwb-r/kwb.plot,
     github::kwb-r/kwb.read,
-    github::kwb-r/kwb.monitoring,
-    github::kwb-r/kwb.logger
+    github::kwb-r/kwb.utils
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
