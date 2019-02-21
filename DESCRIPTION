@@ -39,7 +39,7 @@ Remotes:
     github::kwb-r/kwb.datetime,
     github::kwb-r/kwb.event,
     github::kwb-r/kwb.fakin,    
-    github::kwb-r/kwb.logger
+    github::kwb-r/kwb.logger,
     github::kwb-r/kwb.monitoring,
     github::kwb-r/kwb.plot,
     github::kwb-r/kwb.read,
