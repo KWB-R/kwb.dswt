@@ -9,3 +9,4 @@
 ^appveyor\.yml$
 ^index\.Rmd$
 ^README\.md$
+^\.github$
