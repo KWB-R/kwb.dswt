@@ -4,8 +4,15 @@
 \alias{plotAutoSamplerActions}
 \title{Plot Autosampler Actions}
 \usage{
-plotAutoSamplerActions(actions, fileNumber, subevents.per.page = 3,
-  density = 20, context = c(0, 0.12), evtSepTime = 30 * 60, ...)
+plotAutoSamplerActions(
+  actions,
+  fileNumber,
+  subevents.per.page = 3,
+  density = 20,
+  context = c(0, 0.12),
+  evtSepTime = 30 * 60,
+  ...
+)
 }
 \description{
 Plot Autosampler Actions

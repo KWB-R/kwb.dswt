@@ -4,8 +4,12 @@
 \alias{prepareSingleVariableDataValuesForOdm}
 \title{Prepare Single Variable Data Values for ODM}
 \usage{
-prepareSingleVariableDataValuesForOdm(dataFrame, colName,
-  noDataValue = -9999, dbg = TRUE)
+prepareSingleVariableDataValuesForOdm(
+  dataFrame,
+  colName,
+  noDataValue = -9999,
+  dbg = TRUE
+)
 }
 \arguments{
 \item{dataFrame}{data frame containing the data}

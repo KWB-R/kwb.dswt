@@ -4,8 +4,10 @@
 \alias{completeTimeColumns}
 \title{Complete Time Columns}
 \usage{
-completeTimeColumns(x, wanted = c("BerlinDateTime", "UTCOffset",
-  "DateTimeUTC"))
+completeTimeColumns(
+  x,
+  wanted = c("BerlinDateTime", "UTCOffset", "DateTimeUTC")
+)
 }
 \arguments{
 \item{x}{data frame with time columns}
