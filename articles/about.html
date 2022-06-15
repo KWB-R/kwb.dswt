@@ -4,100 +4,87 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="kwb.dswt">
 <title>About the Creation of this Package • kwb.dswt</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="About the Creation of this Package">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="About the Creation of this Package">
 <meta property="og:description" content="kwb.dswt">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">kwb.dswt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">kwb.dswt</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/about.html">About the Creation of this Package</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/KWB-R/kwb.dswt/">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-</div>
-<!--/.nav-collapse -->
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/about.html">About the Creation of this Package</a>
   </div>
-<!--/.container -->
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/KWB-R/kwb.dswt/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
+    
+  </div>
+</nav><div class="container template-article">
 
-      </header><script src="about_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>About the Creation of this Package</h1>
-                        <h4 class="author">Hauke Sonnenberg</h4>
+
+
+<script src="about_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+  <main id="main" class="col-md-9"><div class="page-header">
+      <img src="" class="logo" alt=""><h1>About the Creation of this Package</h1>
+                        <h4 data-toc-skip class="author">Hauke Sonnenberg</h4>
             
-            <h4 class="date">2021-07-11</h4>
+            <h4 data-toc-skip class="date">2022-06-15</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/KWB-R/kwb.dswt/blob/master/vignettes/about.Rmd"><code>vignettes/about.Rmd</code></a></small>
-      <div class="hidden name"><code>about.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/KWB-R/kwb.dswt/blob/HEAD/vignettes/about.Rmd" class="external-link"><code>vignettes/about.Rmd</code></a></small>
+      <div class="d-none name"><code>about.Rmd</code></div>
     </div>
 
     
     
-<p>This package was created during the runtime of the KWB project <a href="https://www.kompetenz-wasser.de/en/project/dswt/">DSWT (Decentralised Treatment of Roadway Runoffs)</a>. I want to document here what I did to the package since then.</p>
-<div id="convert-inline-documentation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#convert-inline-documentation" class="anchor"></a>Convert Inline Documentation</h2>
+<p>This package was created during the runtime of the KWB project <a href="https://www.kompetenz-wasser.de/en/forschung/projekte/dswt" class="external-link">DSWT (Decentralised Treatment of Roadway Runoffs)</a>. I want to document here what I did to the package since then.</p>
+<div class="section level2">
+<h2 id="convert-inline-documentation">Convert Inline Documentation<a class="anchor" aria-label="anchor" href="#convert-inline-documentation"></a>
+</h2>
 <p>In the package I already used so called inline documentation, i.e. I shortly described functions and their arguments by means of special comments directly in the source code. A function header, for example, looked like that:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">readAndPlotAutoSamplerFiles</span> <span class="op">&lt;-</span> <span class="kw">function</span> <span class="co"># readAndPlotAutoSamplerFiles</span>
@@ -117,7 +104,7 @@
 <span class="op">}</span></code></pre></div>
 <p>You could give a title after <code>function</code> (here just the name of the function, <code>readAndPlotAutoSamplerFiles</code>, and a description direcly behind after three comment characters, <code>###</code>. The example above reveals that I was too lazy to give a good title and description. Instead, I just used the name of the function for both. Then, again after <code>###</code> in each case and always directly following the definition of an argument, you could document the meaning of the arguments of the function. Again, the example above is not a good model as it lacks the description of the last argument, <code>evtSepTime</code>.</p>
 <p>I was then using the package “inlinedocs” to convert these comments into R documentation files.</p>
-<p><a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html">Roxygen</a> is another system that allows to generate documentation from special comments in the source code. As Roxygen has evolved to a quasi-standard for inline documentation and is supported by the Development Environment <a href="https://www.rstudio.com/">RStudio</a>, I converted all inlinedocs comments to Roxygen comments. For that purpose I used the script <code>toRoxygen.R</code> that is under Subversion control in the subfolder <code>RScripts/_OTHERS/</code>.</p>
+<p><a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html" class="external-link">Roxygen</a> is another system that allows to generate documentation from special comments in the source code. As Roxygen has evolved to a quasi-standard for inline documentation and is supported by the Development Environment <a href="https://www.rstudio.com/" class="external-link">RStudio</a>, I converted all inlinedocs comments to Roxygen comments. For that purpose I used the script <code>toRoxygen.R</code> that is under Subversion control in the subfolder <code>RScripts/_OTHERS/</code>.</p>
 <p>After conversion, the header of the function above looked (almost) like that:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#' Read and Plot Autosampler Files</span>
@@ -137,11 +124,11 @@
 <span class="op">{</span>
   <span class="co"># Here comes the body of the function</span>
 <span class="op">}</span></code></pre></div>
-<p>All documentation snippets are now altogether in a comment code block directly above the function. In this block, all comments start with <code>#'</code> which indicates that these are special comments that are interpreded by Roxygen. The block starts with the title of the function. My converter script used my original “title” that was just the name of the function but after conversion I put a new, somehow meaningful title, “Read and Plot Autosampler Files”. Roxygen supports some keywords, so called tags, that start with the <code><a href="https://rdrr.io/r/base/slotOp.html">@</a></code> character. In the above example only the <code>@param</code> tag is used that indicates that the description of an argument (parameter) of the function is following.</p>
+<p>All documentation snippets are now altogether in a comment code block directly above the function. In this block, all comments start with <code>#'</code> which indicates that these are special comments that are interpreded by Roxygen. The block starts with the title of the function. My converter script used my original “title” that was just the name of the function but after conversion I put a new, somehow meaningful title, “Read and Plot Autosampler Files”. Roxygen supports some keywords, so called tags, that start with the <code>@</code> character. In the above example only the <code>@param</code> tag is used that indicates that the description of an argument (parameter) of the function is following.</p>
 </div>
-<div id="call-functions-in-base-packages-with-their-package-name" class="section level2">
-<h2 class="hasAnchor">
-<a href="#call-functions-in-base-packages-with-their-package-name" class="anchor"></a>Call Functions in Base Packages with their Package Name</h2>
+<div class="section level2">
+<h2 id="call-functions-in-base-packages-with-their-package-name">Call Functions in Base Packages with their Package Name<a class="anchor" aria-label="anchor" href="#call-functions-in-base-packages-with-their-package-name"></a>
+</h2>
 <p>When I ran “Check” on the package, I got some notes in case of calling functions from the base packages “utils” or “graphics”. A corresponding note reads like the following:</p>
 <pre><code>* checking R code for possible problems ... NOTE
 plotAutoSamplerActions: no visible global function definition for
@@ -153,95 +140,92 @@ Consider adding
 to your NAMESPACE file.</code></pre>
 <p>I put <code>utils::</code> or <code>graphics::</code> in front of the function calls and the notes disappeared.</p>
 </div>
-<div id="export-only-the-top-level-functions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#export-only-the-top-level-functions" class="anchor"></a>Export only the Top-Level Functions</h2>
+<div class="section level2">
+<h2 id="export-only-the-top-level-functions">Export only the Top-Level Functions<a class="anchor" aria-label="anchor" href="#export-only-the-top-level-functions"></a>
+</h2>
 <p>It is good practice to organise your code in terms of functions. In order</p>
 <ul>
 <li>to avoid code duplication,</li>
 <li>to allow for a reuse of existing code and</li>
 <li>to improve the readability of the code</li>
 </ul>
-<p>it is also good practice to split the code within functions up into further sub-functions. This may result in a lot of functions and sub-functions. From a developer’s point of view you may say: the more functions the better, given the fact that they have good interfaces and meaningful names. However, the user of the package should not be confronted with the full bunch of functions. Therefore, only the top-level functions and not their sub-functions should be “exported” from the package, i.e. made availalble to the user when calling <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. In my original version, the package kwb.dswt did not respect this recommendation and exported all functions by having the following line in the <code>NAMESPACE</code> file:</p>
+<p>it is also good practice to split the code within functions up into further sub-functions. This may result in a lot of functions and sub-functions. From a developer’s point of view you may say: the more functions the better, given the fact that they have good interfaces and meaningful names. However, the user of the package should not be confronted with the full bunch of functions. Therefore, only the top-level functions and not their sub-functions should be “exported” from the package, i.e. made availalble to the user when calling <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code>. In my original version, the package kwb.dswt did not respect this recommendation and exported all functions by having the following line in the <code>NAMESPACE</code> file:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">exportPattern</span><span class="op">(</span><span class="st">".*"</span><span class="op">)</span></code></pre></div>
 <p>I wanted to change this behaviour by using the Roxygen tag <code>@export</code> in the Roxygen headers of the functions to be exported and to let Roxygen generate the <code>NAMESPACE</code> file instead of manually maintaining this file. That arose the following question:</p>
 <p><strong>What functions of the package are (or have ever been) used from a script outside of the package?</strong></p>
-<p>In fact, this question and my thoughts about its answer motivated me to write this vignette. I will (hopefully) propose a small script that finds out what functions of a package are called from a set of given scripts. Here comes the script that uses functions that I wrote in the scope of our project on research data management, <a href="https://www.kompetenz-wasser.de/en/project/fakin-research-data-management/">FAKIN</a>.</p>
+<p>In fact, this question and my thoughts about its answer motivated me to write this vignette. I will (hopefully) propose a small script that finds out what functions of a package are called from a set of given scripts. Here comes the script that uses functions that I wrote in the scope of our project on research data management, <a href="https://www.kompetenz-wasser.de/en/project/fakin-research-data-management/" class="external-link">FAKIN</a>.</p>
 <p>You need to have the packages kwb.fakin and kwb.code installed. Install them from GitHub with:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"kwb-r/kwb.fakin"</span><span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"kwb-r/kwb.code"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"kwb-r/kwb.fakin"</span><span class="op">)</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"kwb-r/kwb.code"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Set the path to the root folder containing the scripts to analyse</span>
 <span class="va">root</span> <span class="op">&lt;-</span> <span class="st">"~/HAUKE/R_Development/RScripts"</span>
 
 <span class="co"># Read all scripts below this root folder</span>
-<span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu">kwb.code</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kwb.code/man/parse_scripts.html">parse_scripts</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root</span><span class="op">)</span>
+<span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu">kwb.code</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kwb.code/man/parse_scripts.html" class="external-link">parse_scripts</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root</span><span class="op">)</span>
 
 <span class="co"># How many scripts were read?</span>
-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">tree</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">tree</span><span class="op">)</span>
 
 <span class="co"># Check which functions from kwb.utils are used and how often</span>
-<span class="va">usage</span> <span class="op">&lt;-</span> <span class="fu">kwb.fakin</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kwb.fakin/man/get_package_function_usage.html">get_package_function_usage</a></span><span class="op">(</span>
+<span class="va">usage</span> <span class="op">&lt;-</span> <span class="fu">kwb.fakin</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kwb.fakin/man/get_package_function_usage.html" class="external-link">get_package_function_usage</a></span><span class="op">(</span>
   <span class="va">tree</span>, package <span class="op">=</span> <span class="st">"kwb.dswt"</span>, simple <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span>
 
 <span class="co"># Show the table of function usage</span>
 <span class="va">usage</span></code></pre></div>
-<pre><code>#&gt;     X                                  name count explicit implicit
-#&gt; 1   1                  getLevelFilesForSite    18        0       18
-#&gt; 2   2                       DSWT_FILE_TYPES     9        0        9
-#&gt; 3   3                  DSWT_DICTIONARY_FILE     8        0        8
-#&gt; 4   4                      getDswtFilePaths     8        0        8
-#&gt; 5   5                    getHQSeriesFromCSV     4        0        4
-#&gt; 6   6           readAndPlotAutoSamplerFiles     4        0        4
-#&gt; 7   7                               dswtdir     3        0        3
-#&gt; 8   8                        DSWT_H_OFFSETS     3        0        3
-#&gt; 9   9                        keyFields_DSWT     3        0        3
-#&gt; 10 10 prepareSingleVariableDataValuesForOdm     3        0        3
-#&gt; 11 11                         .siteNameToDN     3        0        3
-#&gt; 12 12                      dirUploadedFiles     2        0        2
-#&gt; 13 13                      DSWT_RAIN_GAUGES     2        1        1
-#&gt; 14 14                            DSWT_SITES     2        0        2
-#&gt; 15 15                       DSWT_TIMESERIES     2        0        2
-#&gt; 16 16                 addTotalVolumeAndMaxQ     1        0        1
-#&gt; 17 17            DSWT_BWB_CODE_TO_SITE_CODE     1        0        1
-#&gt; 18 18                    getLevelFilesInfo2     1        0        1
-#&gt; 19 19            insertLocalDateTimeColumns     1        1        0
-#&gt; 20 20               insertUtcDateTimeColumn     1        1        0
-#&gt; 21 21                     readAllLevelFiles     1        0        1
-#&gt; 22 22                        reformatEvents     1        0        1
-#&gt; 23 23                       toLevelFileInfo     1        0        1
-#&gt; 24 24             validate_HQ_relationships     1        0        1
-#&gt; 25 25                   writeEventListToCSV     1        0        1
-#&gt; 26 26                    writeHQSeriesToCSV     1        0        1</code></pre>
+<pre><code><span class="co">#&gt;     X                                  name count explicit implicit</span>
+<span class="co">#&gt; 1   1                  getLevelFilesForSite    18        0       18</span>
+<span class="co">#&gt; 2   2                       DSWT_FILE_TYPES     9        0        9</span>
+<span class="co">#&gt; 3   3                  DSWT_DICTIONARY_FILE     8        0        8</span>
+<span class="co">#&gt; 4   4                      getDswtFilePaths     8        0        8</span>
+<span class="co">#&gt; 5   5                    getHQSeriesFromCSV     4        0        4</span>
+<span class="co">#&gt; 6   6           readAndPlotAutoSamplerFiles     4        0        4</span>
+<span class="co">#&gt; 7   7                               dswtdir     3        0        3</span>
+<span class="co">#&gt; 8   8                        DSWT_H_OFFSETS     3        0        3</span>
+<span class="co">#&gt; 9   9                        keyFields_DSWT     3        0        3</span>
+<span class="co">#&gt; 10 10 prepareSingleVariableDataValuesForOdm     3        0        3</span>
+<span class="co">#&gt; 11 11                         .siteNameToDN     3        0        3</span>
+<span class="co">#&gt; 12 12                      dirUploadedFiles     2        0        2</span>
+<span class="co">#&gt; 13 13                      DSWT_RAIN_GAUGES     2        1        1</span>
+<span class="co">#&gt; 14 14                            DSWT_SITES     2        0        2</span>
+<span class="co">#&gt; 15 15                       DSWT_TIMESERIES     2        0        2</span>
+<span class="co">#&gt; 16 16                 addTotalVolumeAndMaxQ     1        0        1</span>
+<span class="co">#&gt; 17 17            DSWT_BWB_CODE_TO_SITE_CODE     1        0        1</span>
+<span class="co">#&gt; 18 18                    getLevelFilesInfo2     1        0        1</span>
+<span class="co">#&gt; 19 19            insertLocalDateTimeColumns     1        1        0</span>
+<span class="co">#&gt; 20 20               insertUtcDateTimeColumn     1        1        0</span>
+<span class="co">#&gt; 21 21                     readAllLevelFiles     1        0        1</span>
+<span class="co">#&gt; 22 22                        reformatEvents     1        0        1</span>
+<span class="co">#&gt; 23 23                       toLevelFileInfo     1        0        1</span>
+<span class="co">#&gt; 24 24             validate_HQ_relationships     1        0        1</span>
+<span class="co">#&gt; 25 25                   writeEventListToCSV     1        0        1</span>
+<span class="co">#&gt; 26 26                    writeHQSeriesToCSV     1        0        1</span></code></pre>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p>Developed by <a href="https://github.com/hsonne">Hauke Sonnenberg</a>, <a href="https://www.kompetenz-wasser.de/en/project/dswt/">DSWT</a>.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by <a href="https://kompetenz-wasser.de/en/ueber-uns/team/hauke-sonnenberg" class="external-link">Hauke Sonnenberg</a>, <a href="https://kompetenz-wasser.de/en/forschung/projekte/dswt" class="external-link">DSWT</a>, <a href="https://kompetenz-wasser.de/en/forschung/projekte/fakin" class="external-link"><img src="https://old.kompetenz-wasser.de/wp-content/uploads/2017/08/forschung-headerbild_fakin-2-1920x449.jpg" alt="Project FAKIN" width="72"></a>.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>
