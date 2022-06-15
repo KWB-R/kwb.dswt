@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 ```
 
 This package was created during the runtime of the KWB project 
-[DSWT (Decentralised Treatment of Roadway Runoffs)](https://www.kompetenz-wasser.de/en/project/dswt-dezentrale-reinigung-von-strassenabfluessen/).
+[DSWT (Decentralised Treatment of Roadway Runoffs)](https://www.kompetenz-wasser.de/en/forschung/projekte/dswt).
 I want to document here what I did to the package since then.
 
 ## Convert Inline Documentation

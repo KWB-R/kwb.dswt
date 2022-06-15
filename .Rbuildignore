@@ -10,3 +10,5 @@
 ^index\.Rmd$
 ^README\.md$
 ^\.github$
+^index\.md$
+^pkgdown$
