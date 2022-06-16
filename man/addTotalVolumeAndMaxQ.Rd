@@ -4,8 +4,7 @@
 \alias{addTotalVolumeAndMaxQ}
 \title{Add Total Volume and Max Q}
 \usage{
-addTotalVolumeAndMaxQ(qValues, events, eventnr, digitsV = 3,
-  digitsMaxQ = 3)
+addTotalVolumeAndMaxQ(qValues, events, eventnr, digitsV = 3, digitsMaxQ = 3)
 }
 \arguments{
 \item{qValues}{vector of discharge values given in L/s}

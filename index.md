@@ -5,33 +5,24 @@
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/kwb.dswt)]()
 [![R-Universe_Status_Badge](https://kwb-r.r-universe.dev/badges/kwb.dswt)](https://kwb-r.r-universe.dev/)
 
-# kwb.dswt
-
 This package contains functions to be used in KWB project 
 [DSWT](https://www.kompetenz-wasser.de/en/forschung/projekte/dswt).
 
+
 ## Installation
 
-For details on how to install KWB-R packages checkout our [installation tutorial](https://kwb-r.github.io/kwb.pkgbuild/articles/install.html).
+For installing the latest release of this R package run the following code below:
 
 ```r
-### Optionally: specify GitHub Personal Access Token (GITHUB_PAT)
-### See here why this might be important for you:
-### https://kwb-r.github.io/kwb.pkgbuild/articles/install.html#set-your-github_pat
+# Enable repository from kwb-r
+options(repos = c(
+  kwbr = 'https://kwb-r.r-universe.dev',
+  CRAN = 'https://cloud.r-project.org'))
 
-# Sys.setenv(GITHUB_PAT = "mysecret_access_token")
+# Download and install kwb.dswt in R
+install.packages('kwb.dswt')
 
-# Install package "remotes" from CRAN
-if (! require("remotes")) {
-  install.packages("remotes", repos = "https://cloud.r-project.org")
-}
+# Browse the kwb.dswt manual pages
+help(package = 'kwb.dswt')
 
-# Install KWB package 'kwb.dswt' from GitHub
-remotes::install_github("KWB-R/kwb.dswt")
 ```
-
-## Documentation
-
-Release: [https://kwb-r.github.io/kwb.dswt](https://kwb-r.github.io/kwb.dswt)
-
-Development: [https://kwb-r.github.io/kwb.dswt/dev](https://kwb-r.github.io/kwb.dswt/dev)

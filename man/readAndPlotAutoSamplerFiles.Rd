@@ -4,9 +4,12 @@
 \alias{readAndPlotAutoSamplerFiles}
 \title{Read and Plot Autosampler Files}
 \usage{
-readAndPlotAutoSamplerFiles(filePaths,
-  removePattern = "Power|Bluetooth|Modem|SMS|Sonde", to.pdf = TRUE,
-  evtSepTime = 30 * 60)
+readAndPlotAutoSamplerFiles(
+  filePaths,
+  removePattern = "Power|Bluetooth|Modem|SMS|Sonde",
+  to.pdf = TRUE,
+  evtSepTime = 30 * 60
+)
 }
 \arguments{
 \item{filePaths}{full path(s) to ORI Auto sampler log files

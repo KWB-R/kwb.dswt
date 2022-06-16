@@ -4,8 +4,12 @@
 \alias{plotAllAutoSamplerActions}
 \title{Plot all Autosampler Actions}
 \usage{
-plotAllAutoSamplerActions(all.actions, to.pdf = TRUE, group.size = 6,
-  evtSepTime = 30 * 60)
+plotAllAutoSamplerActions(
+  all.actions,
+  to.pdf = TRUE,
+  group.size = 6,
+  evtSepTime = 30 * 60
+)
 }
 \description{
 Plot all Autosampler Actions

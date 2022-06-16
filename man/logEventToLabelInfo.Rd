@@ -4,8 +4,7 @@
 \alias{logEventToLabelInfo}
 \title{Create Label and Colour Information from Event}
 \usage{
-logEventToLabelInfo(ereignis, x, colour.error = "red",
-  colour.sample = "blue")
+logEventToLabelInfo(ereignis, x, colour.error = "red", colour.sample = "blue")
 }
 \value{
 list with elements \emph{labels} and \emph{colours}

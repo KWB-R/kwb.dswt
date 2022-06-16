@@ -4,8 +4,7 @@
 \alias{getActionsFromAutoSamplerFile}
 \title{Get Actions from Autosampler File}
 \usage{
-getActionsFromAutoSamplerFile(pnFile, fileNumber = 1,
-  remove.errors = FALSE)
+getActionsFromAutoSamplerFile(pnFile, fileNumber = 1, remove.errors = FALSE)
 }
 \arguments{
 \item{pnFile}{full path to ORI Auto sampler log files
